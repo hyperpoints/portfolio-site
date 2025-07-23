@@ -18,6 +18,16 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+input:focus {
+  border: none;
+  outline: 2px solid aquamarine;
+  transition: 0.1s ease-in-out;
+}
+
+input::placeholder {
+  color: rgb(78, 86, 65);
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
