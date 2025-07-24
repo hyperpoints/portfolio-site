@@ -47,10 +47,26 @@ function App() {
 			</WindowWrapper> */}
 
 			<WindowWrapper title="🐸 Glorbo Console" startHeight={400} startWidth={680} windowId={1}>
-				<iframe src="/projects/sample.html" width={"100%"} height={"100%"}></iframe>
+				<iframe
+					src="/projects/sample.html"
+					style={{
+						width: "100%",
+						height: "100%",
+						border: "none",
+						display: "block",
+					}}
+				></iframe>
 			</WindowWrapper>
 			<WindowWrapper title="📊 Charts" startHeight={400} startWidth={680} windowId={2}>
-				<iframe src="/projects/tables.html" width={"100%"} height={"100%"}></iframe>
+				<iframe
+					src="/projects/tables.html"
+					style={{
+						width: "100%",
+						height: "100%",
+						border: "none",
+						display: "block",
+					}}
+				></iframe>
 			</WindowWrapper>
 			{/* <div className="card size-full">
 				<button

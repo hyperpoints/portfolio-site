@@ -44,12 +44,14 @@ export default function WindowWrapper({
 	}, [isDragging, size, setIsAnyDragging]);
 
 	const startDrag = (e) => {
-		offset.current = {
-			x: e.clientX - position.x,
-			y: e.clientY - position.y,
-		};
-		setIsAnyDragging(true);
-		setDragging(true);
+		if (!isAnyDragging) {
+			offset.current = {
+				x: e.clientX - position.x,
+				y: e.clientY - position.y,
+			};
+			setIsAnyDragging(true);
+			setDragging(true);
+		}
 	};
 
 	const raise = () => {
@@ -60,28 +62,36 @@ export default function WindowWrapper({
 		}
 	};
 
+	const sizeRef = useRef(size);
+
 	const startResize = (e) => {
 		e.preventDefault();
-		raise();
 		const startX = e.clientX;
 		const startY = e.clientY;
 		const startWidth = size.width;
 		const startHeight = size.height;
+		setIsAnyDragging(true);
 
 		const doResize = (e) => {
-			setSize({
-				width: Math.max(200, startWidth + (e.clientX - startX)),
-				height: Math.max(100, startHeight + (e.clientY - startY)),
+			const newWidth = Math.max(200, startWidth + (e.clientX - startX));
+			const newHeight = Math.max(100, startHeight + (e.clientY - startY));
+			sizeRef.current = { width: newWidth, height: newHeight };
+			// Force an update using requestAnimationFrame for smoother feedback
+			requestAnimationFrame(() => {
+				setSize(sizeRef.current);
 			});
 		};
 
 		const stopResize = () => {
 			window.removeEventListener("mousemove", doResize);
 			window.removeEventListener("mouseup", stopResize);
+			window.removeEventListener("mouseleave", stopResize);
+			setIsAnyDragging(false);
 		};
 
 		window.addEventListener("mousemove", doResize);
 		window.addEventListener("mouseup", stopResize);
+		window.addEventListener("mouseleave", stopResize);
 	};
 
 	return (

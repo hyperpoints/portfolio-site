@@ -23,13 +23,14 @@
 }
 
 .window-body {
+  position: relative;
+  padding-bottom: 30px;
     /* background-image: url('../../data/images/rainforest-image.jpg');
   background-size: cover; */
   background-color: #333;
   /* padding: 1rem; */
-  height: calc(100% - 30px);
-  /* overflow: auto; */
-  overflow: hidden;
+  /* height: calc(100% - 30px); */
+  overflow: scroll;
 }
 
 .window-resizer {
