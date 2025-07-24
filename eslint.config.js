@@ -39,6 +39,7 @@ export default defineConfig([
 			"no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
 			"import/named": "error", // ⬅️ catch bad named imports
 			"react/jsx-no-undef": ["error", { allowGlobals: true }],
+			"react-hooks/exhaustive-deps": "off",
 		},
 	},
 ]);

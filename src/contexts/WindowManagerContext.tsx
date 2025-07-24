@@ -9,7 +9,12 @@ export function WindowManagerProvider({ children }) {
 
 	return (
 		<WindowManagerContext.Provider
-			value={{ focusedId, setFocusedId, isAnyDragging, setIsAnyDragging }}
+			value={{
+				focusedId,
+				setFocusedId,
+				isAnyDragging,
+				setIsAnyDragging,
+			}}
 		>
 			{children}
 		</WindowManagerContext.Provider>
