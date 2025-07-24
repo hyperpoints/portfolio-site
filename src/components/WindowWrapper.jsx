@@ -26,7 +26,8 @@ export default function WindowWrapper({
 			const newX = e.clientX - offset.current.x;
 			const newY = e.clientY - offset.current.y;
 			const clampedX = Math.max(0, Math.min(newX, window.innerWidth - size.width));
-			const clampedY = Math.max(0, Math.min(newY, window.innerHeight - size.height));
+			// const clampedY = Math.max(0, Math.min(newY, window.innerHeight - size.height));
+			const clampedY = Math.max(0, Math.min(newY, window.innerHeight - 30)); // 30 = titlebar height
 			setPosition({ x: clampedX, y: clampedY });
 		};
 

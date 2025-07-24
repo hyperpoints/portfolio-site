@@ -57,9 +57,14 @@ function App() {
 					}}
 				></iframe>
 			</WindowWrapper>
-			<WindowWrapper title="📊 Charts" startHeight={400} startWidth={680} windowId={2}>
+			<WindowWrapper
+				title="🐳 Theatrical Intelligence"
+				startHeight={633}
+				startWidth={680}
+				windowId={2}
+			>
 				<iframe
-					src="/projects/tables.html"
+					src="/projects/theatrical.html"
 					style={{
 						width: "100%",
 						height: "100%",
