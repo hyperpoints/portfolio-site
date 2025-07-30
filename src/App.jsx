@@ -84,7 +84,7 @@ function App() {
         title="Sherlock Holmes and the Great Computer Virus of Notthingham Corner Square"
         startHeight={633}
         startWidth={680}
-        windowId={2}
+        windowId={3}
       >
         <iframe
           src="/projects/sherlock-holmes-great-computer-virus.html"
@@ -101,7 +101,7 @@ function App() {
         title="🐳 Theatrical Intelligence"
         startHeight={633}
         startWidth={680}
-        windowId={3}
+        windowId={4}
       >
         <iframe
           src="/projects/theatrical.html"
