@@ -39,6 +39,7 @@
   width: 15px;
   padding: 0;
   margin: 0 4px;
+  cursor: default;
 }
 
 .window-buttons button svg {
@@ -51,11 +52,13 @@
 .window-buttons button:hover svg {
   display: inline;
   stroke: #272727;
+  opacity: 0.7;
   transition: 0.1s ease-in-out;
 }
 
 .window-buttons button:active svg {
   display: inline;
+  /* stroke: #000000; */
   stroke: white;
   transition: 0.1s ease-in-out;
 }
