@@ -62,6 +62,25 @@ function App() {
         ></iframe>
       </WindowWrapper>
       <WindowWrapper
+        // title="Sherlock Holmes and the Great Computer Virus of Notthingham Corner Square"
+        title="Godot Engine"
+        startHeight={633}
+        startWidth={680}
+        windowId={2}
+      >
+        <iframe
+          // src="/projects/sherlock-holmes-great-computer-virus.html"
+          src="https://docs.godotengine.org/en/stable/index.html"
+          style={{
+            width: "100%",
+            height: "100%",
+            border: "none",
+            position: "initial",
+            // position: "relative",
+          }}
+        ></iframe>
+      </WindowWrapper>
+      <WindowWrapper
         title="Sherlock Holmes and the Great Computer Virus of Notthingham Corner Square"
         startHeight={633}
         startWidth={680}
@@ -73,7 +92,8 @@ function App() {
             width: "100%",
             height: "100%",
             border: "none",
-            display: "block",
+            position: "initial",
+            // position: "relative",
           }}
         ></iframe>
       </WindowWrapper>

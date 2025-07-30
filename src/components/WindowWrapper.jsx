@@ -180,8 +180,8 @@ export default function WindowWrapper({
         >
           {children}
         </div>
+        <div className="window-resizer" onMouseDown={startResize} />
       </div>
-      <div className="window-resizer" onMouseDown={startResize} />
     </div>
   )
 }
