@@ -116,6 +116,7 @@ export default function WindowWrapper({
       <div className="window-titlebar" onMouseDown={startDrag}>
         <div className="window-buttons">
           <button
+            onClick={() => console.log("close button clicked: ", title)}
             style={{
               // padding: "5px",
               backgroundColor: "#FF605C",
@@ -126,6 +127,7 @@ export default function WindowWrapper({
             <X size={12} />
           </button>
           <button
+            onClick={() => console.log("minimize button clicked: ", title)}
             style={{
               // padding: "5px",
               backgroundColor: "#FFBD44",
@@ -136,6 +138,7 @@ export default function WindowWrapper({
             <Minus size={12}></Minus>
           </button>
           <button
+            onClick={() => console.log("fullscreen button clicked: ", title)}
             style={{
               // padding: "5px",
               backgroundColor: "#00CA4E",

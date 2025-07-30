@@ -30,6 +30,7 @@
   display: flex;
   flex-wrap: nowrap;
   padding: 3px;
+  pointer-events: all;
 }
 
 .window-buttons button {
@@ -43,6 +44,7 @@
   display: inline;
   margin-bottom: 9px;
   stroke: transparent;
+  pointer-events: none;
 }
 
 .window-buttons button:hover svg {
