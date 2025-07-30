@@ -29,35 +29,33 @@
 .window-buttons {
   display: flex;
   flex-wrap: nowrap;
-  padding: 3px;
+  padding: 5px 0;
+  margin-right: 3px;
   pointer-events: all;
 }
 
 .window-buttons button {
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   padding: 0;
-  margin: 0 2px;
+  margin: 0 4px;
 }
 
 .window-buttons button svg {
   display: inline;
-  margin-bottom: 9px;
+  margin-bottom: 14px;
   stroke: transparent;
   pointer-events: none;
 }
 
 .window-buttons button:hover svg {
   display: inline;
-  margin-bottom: 9px;
-  /* stroke: white; */
   stroke: #272727;
   transition: 0.1s ease-in-out;
 }
 
 .window-buttons button:active svg {
   display: inline;
-  margin-bottom: 9px;
   stroke: white;
   transition: 0.1s ease-in-out;
 }
@@ -67,7 +65,7 @@
   max-width: 90%;
   align-content: center;
   width: 100%;
-  margin-right: 40px;
+  margin-right: 50px;
 }
 
 .window-body {
