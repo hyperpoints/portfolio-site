@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react"
 import { useWindowManager } from "../contexts/WindowManagerContext"
-import "./styles/window.css"
+import "./styles/window.less"
 import { Maximize2, Minus, X } from "lucide-react"
 
 let nextZ = 1000
