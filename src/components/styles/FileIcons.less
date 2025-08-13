@@ -12,10 +12,16 @@
   display: flex;
   flex-direction: column; /* This makes the icon and text stack vertically */
   align-items: center; /* This centers the icon and label relative to each other */
-  padding-bottom: 10px;
+  padding-bottom: 17px;
+
+  button {
+    padding: 0;
+  }
 
   svg {
     fill: #7be0e9;
+    stroke: #8feff8;
+    stroke-width: 1px;
   }
 }
 
@@ -26,4 +32,11 @@ p.file-label {
   line-clamp: 2;
   -webkit-line-clamp: 2; /* Adjust this value to set the number of lines you want to show */
   -webkit-box-orient: vertical;
+
+  max-width: 100px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 14px;
+  text-align: center;
 }

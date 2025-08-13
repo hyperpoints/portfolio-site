@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
-import { File } from "lucide-react"
+import { FolderClosed } from "lucide-react"
 import "./styles/FileIcons.less"
 
 export default function FileIcons() {
@@ -27,19 +27,9 @@ export default function FileIcons() {
                 onDoubleClick={() => setOpenWindows([...openWindows, file])}
                 key={file.name}
               >
-                <File size={50}></File>
+                <FolderClosed size={60}></FolderClosed>
               </button>
-              <p
-                className="file-label"
-                style={{
-                  maxWidth: "200px",
-                  textOverflow: "ellipsis",
-                  WebkitLineClamp: 2,
-                  overflow: "hidden",
-                }}
-              >
-                {file.name}
-              </p>
+              <p className="file-label">{file.name}</p>
             </div>
           )
         }
