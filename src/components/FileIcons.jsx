@@ -22,11 +22,11 @@ export default function FileIcons() {
         if (file.display !== false) {
           console.log(file)
           return (
-            <div className="file">
-              <button
-                onDoubleClick={() => setOpenWindows([...openWindows, file])}
-                key={file.name}
-              >
+            <div
+              className="file"
+              onDoubleClick={() => setOpenWindows([...openWindows, file])}
+            >
+              <button key={file.name}>
                 <FolderClosed size={60}></FolderClosed>
               </button>
               <p className="file-label">{file.name}</p>
