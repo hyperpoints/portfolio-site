@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 import { File } from "lucide-react"
+import "./styles/FileIcons.less"
 
 export default function FileIcons() {
   const { fileList, setFileList, setOpenWindows, openWindows } =
@@ -21,7 +22,7 @@ export default function FileIcons() {
         if (file.display !== false) {
           console.log(file)
           return (
-            <div style={{ padding: "3px" }}>
+            <div className="file">
               <button
                 onDoubleClick={() => setOpenWindows([...openWindows, file])}
                 key={file.name}
@@ -47,5 +48,5 @@ export default function FileIcons() {
     return <></>
   }, [fileList, openWindows])
 
-  return <div>{renderFileIcons}</div>
+  return <div className="file-icons-container">{renderFileIcons}</div>
 }
