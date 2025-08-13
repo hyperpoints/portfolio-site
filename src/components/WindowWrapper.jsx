@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from "react"
-import { useWindowManager } from "../contexts/WindowManagerContext"
+import { useFileSystemContext } from "../contexts/FileSystemContext"
 import "./styles/window.less"
 import { Maximize2, Minus, X } from "lucide-react"
 
-let nextZ = 1000
+let nextZ = 1
 
 export default function WindowWrapper({
   title = "Window",
@@ -11,9 +11,10 @@ export default function WindowWrapper({
   startHeight = 300,
   startWidth = 400,
   windowId, // each window should have a unique id
+  close,
 }) {
   const { focusedId, setFocusedId, isAnyDragging, setIsAnyDragging } =
-    useWindowManager()
+    useFileSystemContext()
   const ref = useRef(null)
   const [zIndex, setZIndex] = useState(nextZ++)
   const [position, setPosition] = useState({ x: 100, y: 100 })
@@ -116,7 +117,10 @@ export default function WindowWrapper({
       <div className="window-titlebar" onMouseDown={startDrag}>
         <div className="window-buttons">
           <button
-            onClick={() => console.log("close button clicked: ", title)}
+            onClick={() => {
+              console.log("close button clicked: ", title)
+              close(title)
+            }}
             style={{
               // padding: "5px",
               backgroundColor: "#FF605C",
