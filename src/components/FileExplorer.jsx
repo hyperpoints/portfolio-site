@@ -2,11 +2,10 @@ import { useEffect, useMemo, useState } from "react"
 import "./styles/FileExplorer.less"
 import { File, Folder } from "lucide-react"
 // import WindowWrapper from "../components/WindowWrapper"
-// import { useFileSystemContext } from "../contexts/FileSystemContext"
+import { useFileSystemContext } from "../contexts/FileSystemContext"
 
 function FileExplorer({ folder }) {
-  // const { iconlist, setIconlist, setOpenWindows, openWindows } =
-  //   useFileSystemContext()
+  const { setOpenWindows, openWindows } = useFileSystemContext()
   const [fileList, setFileList] = useState([])
 
   useEffect(() => {
@@ -30,8 +29,8 @@ function FileExplorer({ folder }) {
         return (
           <li
             className="file-item"
-            key={file.name}
-            onDoubleClick={() => console.log("file clicked!", file.name)}
+            key={index}
+            onDoubleClick={() => setOpenWindows([...openWindows, file])}
           >
             {/* <Folder size={18} /> */}
             <File size={18} />
