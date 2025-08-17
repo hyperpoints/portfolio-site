@@ -6,7 +6,7 @@ const FileSystemContext: any = createContext({})
 export function FileSystemProvider({ children }) {
   const [focusedId, setFocusedId] = useState(null)
   const [isAnyDragging, setIsAnyDragging] = useState(false)
-  const [fileList, setFileList] = useState([])
+  const [iconlist, setIconlist] = useState([])
   const [openWindows, setOpenWindows] = useState([])
 
   return (
@@ -16,8 +16,8 @@ export function FileSystemProvider({ children }) {
         setFocusedId,
         isAnyDragging,
         setIsAnyDragging,
-        fileList,
-        setFileList,
+        iconlist,
+        setIconlist,
         openWindows,
         setOpenWindows,
       }}

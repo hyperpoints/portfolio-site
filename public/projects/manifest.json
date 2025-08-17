@@ -32,7 +32,7 @@
     "name": "images",
     "startHeight": 633,
     "startWidth": 680,
-    "link": "/images/",
+    "link": "images",
     "type": "folder"
   }
 ]

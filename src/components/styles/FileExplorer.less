@@ -1,0 +1,29 @@
+.file-explorer-container {
+  height: 100%;
+  background-color: #272727;
+  padding: 8px 4px;
+
+  .file-list {
+    background-color: #272727;
+    color: white;
+  }
+
+  .file-item {
+    cursor: pointer;
+    user-select: none;
+    padding: 1px 0;
+    align-items: center;
+    display: flex;
+
+    svg {
+      display: flex;
+      margin: 0 7px;
+      fill: white;
+    }
+  }
+
+  .file-item:hover {
+    color: #a0abd9;
+    transition: 0.1s ease-in-out;
+  }
+}
