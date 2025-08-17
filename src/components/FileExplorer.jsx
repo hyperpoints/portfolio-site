@@ -39,7 +39,7 @@ function FileExplorer({ folder }) {
         )
       })
     }
-  }, [fileList])
+  }, [fileList, openWindows])
 
   return (
     <div className="file-explorer-container">
