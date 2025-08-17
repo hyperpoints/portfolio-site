@@ -8,8 +8,9 @@ let nextZ = 1
 export default function WindowWrapper({
   title = "Window",
   children,
+  autoHeight = false,
   startHeight = 300,
-  startWidth = 400,
+  startWidth = 500,
   windowId, // each window should have a unique id
   close,
 }) {
@@ -109,7 +110,7 @@ export default function WindowWrapper({
         top: position.y,
         left: position.x,
         width: size.width,
-        height: size.height,
+        height: autoHeight ? "auto" : size.height,
         zIndex,
       }}
       onMouseDown={raise}

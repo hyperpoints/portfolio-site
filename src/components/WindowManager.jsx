@@ -33,8 +33,8 @@ function WindowManager() {
               return (
                 <WindowWrapper
                   title={file.name}
-                  startHeight={file.startHeight}
                   startWidth={file.startWidth}
+                  autoHeight
                   windowId={file.name}
                   close={closeWindow}
                   key={index}
