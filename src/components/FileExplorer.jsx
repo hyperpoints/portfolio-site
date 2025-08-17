@@ -28,7 +28,11 @@ function FileExplorer({ folder }) {
       return fileList.map((file, index) => {
         // return console.log(file)
         return (
-          <li className="file-item" key={file.name}>
+          <li
+            className="file-item"
+            key={file.name}
+            onDoubleClick={() => console.log("file clicked!", file.name)}
+          >
             {/* <Folder size={18} /> */}
             <File size={18} />
             {file.name}
