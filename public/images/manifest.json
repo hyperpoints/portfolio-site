@@ -8,5 +8,15 @@
     "name": "rainforest-image.jpg",
     "link": "/images/rainforest-image.jpg",
     "type": "image"
+  },
+  {
+    "name": "underwater.gif",
+    "link": "/images/underwater.gif",
+    "type": "image"
+  },
+  {
+    "name": "rainy-leaves.gif",
+    "link": "/images/rainy-leaves.gif",
+    "type": "image"
   }
 ]
