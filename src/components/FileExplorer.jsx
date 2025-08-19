@@ -12,25 +12,26 @@ function FileExplorer({ folder }) {
     fetch(`/${folder}/manifest.json`) // Note: no /public in the path
       .then((response) => response.json())
       .then((data) => {
-        console.log("fileExplorer", data)
         setFileList(data)
       })
   }, [])
 
-  // const closeWindow = (windowId) => {
-  //   setOpenWindows([...openWindows.filter((file) => file.name !== windowId)])
-  // }
+  const openWindow = (file) => {
+    // generate a unique id for this window
+    const uniqueId = crypto.randomUUID()
+    // Clone the file object to avoid modifying the original data
+    const newFile = { ...file, id: uniqueId }
+    setOpenWindows([...openWindows, newFile])
+  }
 
   const renderFileList = useMemo(() => {
     if (fileList) {
-      // console.log(openWindows)
       return fileList.map((file, index) => {
-        // return console.log(file)
         return (
           <li
             className="file-item"
             key={index}
-            onDoubleClick={() => setOpenWindows([...openWindows, file])}
+            onDoubleClick={() => openWindow(file)}
           >
             {/* <Folder size={18} /> */}
             <File size={18} />

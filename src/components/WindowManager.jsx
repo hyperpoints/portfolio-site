@@ -7,13 +7,12 @@ function WindowManager() {
   const { setOpenWindows, openWindows } = useFileSystemContext()
 
   const closeWindow = (windowId) => {
-    setOpenWindows([...openWindows.filter((file) => file.name !== windowId)])
+    setOpenWindows([...openWindows.filter((file) => file.id !== windowId)])
   }
 
   const renderWindows = useMemo(() => {
     if (openWindows) {
-      // console.log(openWindows)
-      return openWindows.map((file, index) => {
+      return openWindows.map((file) => {
         if (file.display !== false) {
           switch (file.type) {
             case "folder":
@@ -22,9 +21,9 @@ function WindowManager() {
                   title={file.name}
                   // startHeight={file.startHeight}
                   // startWidth={file.startWidth}
-                  windowId={file.name}
+                  windowId={file.id}
+                  key={file.id}
                   close={closeWindow}
-                  key={index}
                 >
                   <FileExplorer folder={file.link} />
                 </WindowWrapper>
@@ -35,9 +34,9 @@ function WindowManager() {
                   title={file.name}
                   startWidth={800}
                   autoHeight
-                  windowId={file.name}
+                  windowId={file.id}
+                  key={file.id}
                   close={closeWindow}
-                  key={index}
                 >
                   <img
                     src={file.link}
@@ -56,9 +55,9 @@ function WindowManager() {
                   title={file.name}
                   startHeight={file.startHeight}
                   startWidth={file.startWidth}
-                  windowId={file.name}
+                  windowId={file.id}
+                  key={file.id}
                   close={closeWindow}
-                  key={index}
                 >
                   <iframe
                     src={file.link}

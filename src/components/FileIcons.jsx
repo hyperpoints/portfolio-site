@@ -11,23 +11,28 @@ export default function FileIcons() {
     fetch("/projects/manifest.json") // Note: no /public in the path
       .then((response) => response.json())
       .then((data) => {
-        // console.log("data fetched: ", data)
         setIconlist(data)
       })
   }, [])
+
+  const openWindow = (file) => {
+    // generate a unique id for this window
+    const uniqueId = crypto.randomUUID()
+    // Clone the file object to avoid modifying the original data
+    const newFile = { ...file, id: uniqueId }
+    setOpenWindows([...openWindows, newFile])
+  }
 
   const renderFileIcons = useMemo(() => {
     if (iconlist) {
       return iconlist.map((file) => {
         if (file.display == false) return
-
         // handle folders in their own way
         if (file.type !== "folder") {
-          // console.log(file)
           return (
             <div
               className="file"
-              onDoubleClick={() => setOpenWindows([...openWindows, file])}
+              onDoubleClick={() => openWindow(file)}
               key={file.name}
             >
               <button>
@@ -40,7 +45,7 @@ export default function FileIcons() {
           return (
             <div
               className="file"
-              onDoubleClick={() => setOpenWindows([...openWindows, file])}
+              onDoubleClick={() => openWindow(file)}
               key={file.name}
             >
               <button>

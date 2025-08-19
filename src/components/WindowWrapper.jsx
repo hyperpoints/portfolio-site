@@ -64,7 +64,6 @@ export default function WindowWrapper({
 
   const raise = () => {
     if (focusedId !== windowId) {
-      console.log("focus changed to ", windowId)
       setFocusedId(windowId)
       setZIndex(nextZ++)
     }
@@ -119,8 +118,7 @@ export default function WindowWrapper({
         <div className="window-buttons">
           <button
             onClick={() => {
-              console.log("close button clicked: ", title)
-              close(title)
+              close(windowId)
             }}
             style={{
               // padding: "5px",
