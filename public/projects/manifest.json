@@ -7,14 +7,6 @@
     "type": "html"
   },
   {
-    "name": "Marcille",
-    "startHeight": 383.5,
-    "startWidth": 680,
-    "link": "/images/marcille.webp",
-    "display": false,
-    "type": "image"
-  },
-  {
     "name": "Sherlock Holmes and the Great Computer Virus of Notthingham Corner Square",
     "startHeight": 633,
     "startWidth": 680,
