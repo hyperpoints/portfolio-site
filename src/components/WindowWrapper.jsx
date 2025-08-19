@@ -18,7 +18,10 @@ export default function WindowWrapper({
     useFileSystemContext()
   const ref = useRef(null)
   const [zIndex, setZIndex] = useState(nextZ++)
-  const [position, setPosition] = useState({ x: 100, y: 100 })
+  const [position, setPosition] = useState({
+    x: window.innerWidth / 3,
+    y: 200,
+  })
   const [size, setSize] = useState({ width: startWidth, height: startHeight })
   const [isDragging, setDragging] = useState(false)
   const offset = useRef({ x: 0, y: 0 })
