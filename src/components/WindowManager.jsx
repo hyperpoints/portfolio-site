@@ -32,7 +32,7 @@ function WindowManager() {
               return (
                 <WindowWrapper
                   title={file.name}
-                  startWidth={800}
+                  startWidth={600}
                   autoHeight
                   windowId={file.id}
                   key={file.id}
