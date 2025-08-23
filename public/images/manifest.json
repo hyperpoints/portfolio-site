@@ -1,22 +1,22 @@
 [
   {
     "name": "abstract-wallpaper.jpg",
-    "link": "/images/abstract-wallpaper.jpg",
-    "type": "image"
+    "type": "image",
+    "link": "images/abstract-wallpaper.jpg"
   },
   {
     "name": "rainforest-image.jpg",
-    "link": "/images/rainforest-image.jpg",
-    "type": "image"
-  },
-  {
-    "name": "underwater.gif",
-    "link": "/images/underwater.gif",
-    "type": "image"
+    "type": "image",
+    "link": "images/rainforest-image.jpg"
   },
   {
     "name": "rainy-leaves.gif",
-    "link": "/images/rainy-leaves.gif",
-    "type": "image"
+    "type": "image",
+    "link": "images/rainy-leaves.gif"
+  },
+  {
+    "name": "underwater.gif",
+    "type": "image",
+    "link": "images/underwater.gif"
   }
 ]

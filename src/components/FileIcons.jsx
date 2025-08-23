@@ -8,7 +8,7 @@ export default function FileIcons() {
     useFileSystemContext()
 
   useEffect(() => {
-    fetch("/projects/manifest.json") // Note: no /public in the path
+    fetch("manifest.json") // Note: no /public in the path
       .then((response) => response.json())
       .then((data) => {
         setIconlist(data)

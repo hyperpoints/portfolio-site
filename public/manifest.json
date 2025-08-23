@@ -1,0 +1,17 @@
+[
+  {
+    "name": "images",
+    "type": "folder",
+    "link": "images"
+  },
+  {
+    "name": "infinity-coin.png",
+    "type": "image",
+    "link": "infinity-coin.png"
+  },
+  {
+    "name": "projects",
+    "type": "folder",
+    "link": "projects"
+  }
+]
