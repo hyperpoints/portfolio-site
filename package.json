@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run files",
     "lint": "eslint .",
     "preview": "vite preview",
     "files": "node ./scripts/updateFileManifests.js ./public/"
