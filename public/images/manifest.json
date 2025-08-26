@@ -1,15 +1,5 @@
 [
   {
-    "name": "abstract-wallpaper.jpg",
-    "type": "image",
-    "link": "images/abstract-wallpaper.jpg"
-  },
-  {
-    "name": "rainforest-image.jpg",
-    "type": "image",
-    "link": "images/rainforest-image.jpg"
-  },
-  {
     "name": "rainy-leaves.gif",
     "type": "image",
     "link": "images/rainy-leaves.gif"
@@ -18,5 +8,10 @@
     "name": "underwater.gif",
     "type": "image",
     "link": "images/underwater.gif"
+  },
+  {
+    "name": "wallpaper",
+    "type": "folder",
+    "link": "images/wallpaper"
   }
 ]

@@ -7,14 +7,16 @@ import { useFileSystemContext } from "../contexts/FileSystemContext"
 function FileExplorer({ folder }) {
   const { setOpenWindows, openWindows } = useFileSystemContext()
   const [fileList, setFileList] = useState([])
+  const [openFolder, setOpenFolder] = useState(folder)
 
   useEffect(() => {
-    fetch(`/${folder}/manifest.json`) // Note: no /public in the path
+    fetch(`/${openFolder}/manifest.json`) // Note: no /public in the path
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setFileList(data)
       })
-  }, [])
+  }, [openFolder])
 
   const openWindow = (file) => {
     // generate a unique id for this window
@@ -27,17 +29,30 @@ function FileExplorer({ folder }) {
   const renderFileList = useMemo(() => {
     if (fileList) {
       return fileList.map((file, index) => {
-        return (
-          <li
-            className="file-item"
-            key={index}
-            onDoubleClick={() => openWindow(file)}
-          >
-            {/* <Folder size={18} /> */}
-            <File size={18} />
-            {file.name}
-          </li>
-        )
+        if (file.type == "folder") {
+          return (
+            <li
+              className="file-item"
+              key={index}
+              // onDoubleClick={() => openWindow(file)}
+              onDoubleClick={() => setOpenFolder(file.link)}
+            >
+              <Folder size={18} />
+              {file.name}
+            </li>
+          )
+        } else {
+          return (
+            <li
+              className="file-item"
+              key={index}
+              onDoubleClick={() => openWindow(file)}
+            >
+              <File size={18} />
+              {file.name}
+            </li>
+          )
+        }
       })
     }
   }, [fileList, openWindows])
