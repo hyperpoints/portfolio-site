@@ -7,15 +7,17 @@ import { useFileSystemContext } from "../contexts/FileSystemContext"
 function FileExplorer({ folder }) {
   const { setOpenWindows, openWindows } = useFileSystemContext()
   const [fileList, setFileList] = useState([])
+  const [filePathList, setFilePathList] = useState([])
   const [openFolder, setOpenFolder] = useState(folder)
 
   useEffect(() => {
     fetch(`/${openFolder}/manifest.json`) // Note: no /public in the path
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setFileList(data)
       })
+    // update the filePath
+    setFilePathList(openFolder.split("/"))
   }, [openFolder])
 
   const openWindow = (file) => {
@@ -24,6 +26,22 @@ function FileExplorer({ folder }) {
     // Clone the file object to avoid modifying the original data
     const newFile = { ...file, id: uniqueId }
     setOpenWindows([...openWindows, newFile])
+  }
+
+  const renderFilePath = () => {
+    return filePathList.map((folder, i) => {
+      return (
+        <li
+          key={i}
+          onClick={() => {
+            let currentPath = filePathList.slice(0, i + 1).join("/")
+            setOpenFolder(currentPath)
+          }}
+        >
+          {folder}
+        </li>
+      )
+    })
   }
 
   const renderFileList = useMemo(() => {
@@ -59,6 +77,7 @@ function FileExplorer({ folder }) {
 
   return (
     <div className="file-explorer-container">
+      <ul className="file-path-list">{renderFilePath()}</ul>
       <ul className="file-list">{renderFileList}</ul>
     </div>
   )

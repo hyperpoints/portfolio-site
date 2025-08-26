@@ -3,6 +3,28 @@
   background-color: #272727;
   padding: 8px 4px;
 
+  .file-path-list {
+    margin-bottom: 5px;
+
+    li {
+      display: inline;
+      color: #a0abd9;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    li:hover {
+      color: white;
+      transition: 1s ease-in-out;
+    }
+
+    li::after {
+      content: "/";
+      padding: 3px;
+      color: white;
+    }
+  }
+
   .file-list {
     background-color: #272727;
     color: white;
