@@ -28,6 +28,7 @@ export default function WindowWrapper({
   const isFocused = focusedId === windowId
 
   useEffect(() => {
+    setFocusedId(windowId)
     const onMouseMove = (e) => {
       if (!isDragging) return
       const newX = e.clientX - offset.current.x
@@ -180,8 +181,8 @@ export default function WindowWrapper({
             height: "100%",
             background: "#ccc",
             pointerEvents: !isFocused ? "none" : null,
-            // filter: !isFocused ? "grayscale(50%) blur(1px)" : undefined,
-            // transition: "filter 0.2s ease, opacity 0.2s ease",
+            filter: !isFocused ? "grayscale(30%) blur(0.4px)" : undefined,
+            transition: "filter 0.2s ease, opacity 0.2s ease",
           }}
         >
           {children}
