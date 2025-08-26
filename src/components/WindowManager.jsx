@@ -18,7 +18,7 @@ function WindowManager() {
             case "folder":
               return (
                 <WindowWrapper
-                  title={file.name}
+                  name={"Files"}
                   // startHeight={file.startHeight}
                   // startWidth={file.startWidth}
                   windowId={file.id}
@@ -31,7 +31,7 @@ function WindowManager() {
             case "image":
               return (
                 <WindowWrapper
-                  title={file.name}
+                  name={file.name}
                   startWidth={600}
                   autoHeight
                   windowId={file.id}
@@ -52,7 +52,7 @@ function WindowManager() {
             default:
               return (
                 <WindowWrapper
-                  title={file.name}
+                  name={file.name}
                   startHeight={600}
                   startWidth={680}
                   windowId={file.id}

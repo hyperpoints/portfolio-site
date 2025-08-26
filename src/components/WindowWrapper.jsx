@@ -6,7 +6,7 @@ import { Maximize2, Minus, X } from "lucide-react"
 let nextZ = 1
 
 export default function WindowWrapper({
-  title = "Window",
+  name = "Window",
   children,
   autoHeight = false,
   startHeight = 300,
@@ -133,7 +133,7 @@ export default function WindowWrapper({
             <X size={9} />
           </button>
           <button
-            onClick={() => console.log("minimize button clicked: ", title)}
+            onClick={() => console.log("minimize button clicked: ", name)}
             style={{
               // padding: "5px",
               backgroundColor: "#FFBD44",
@@ -144,7 +144,7 @@ export default function WindowWrapper({
             <Minus size={9}></Minus>
           </button>
           <button
-            onClick={() => console.log("fullscreen button clicked: ", title)}
+            onClick={() => console.log("fullscreen button clicked: ", name)}
             style={{
               // padding: "5px",
               backgroundColor: "#00CA4E",
@@ -155,7 +155,7 @@ export default function WindowWrapper({
             <Maximize2 size={9} style={{ transform: "scaleX(-1)" }}></Maximize2>
           </button>
         </div>
-        <div className="window-title">{title}</div>
+        <div className="window-name">{name}</div>
       </div>
       <div
         className="window-body"
