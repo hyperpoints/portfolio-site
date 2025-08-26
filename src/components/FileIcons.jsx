@@ -36,7 +36,7 @@ export default function FileIcons() {
               key={file.name}
             >
               <button>
-                <File size={60}></File>
+                <File className="file-icons-file" size={60}></File>
               </button>
               <p className="file-label">{file.name}</p>
             </div>
@@ -49,7 +49,10 @@ export default function FileIcons() {
               key={file.name}
             >
               <button>
-                <FolderClosed size={60}></FolderClosed>
+                <FolderClosed
+                  className="file-icons-folder"
+                  size={60}
+                ></FolderClosed>
               </button>
               <p className="file-label">{file.name}</p>
             </div>

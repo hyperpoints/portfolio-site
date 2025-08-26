@@ -55,7 +55,7 @@ function FileExplorer({ folder }) {
               // onDoubleClick={() => openWindow(file)}
               onDoubleClick={() => setOpenFolder(file.link)}
             >
-              <Folder size={18} />
+              <Folder className="file-explorer-folder" size={18} />
               {file.name}
             </li>
           )
@@ -66,7 +66,7 @@ function FileExplorer({ folder }) {
               key={index}
               onDoubleClick={() => openWindow(file)}
             >
-              <File size={18} />
+              <File className="file-explorer-file" size={18} />
               {file.name}
             </li>
           )
