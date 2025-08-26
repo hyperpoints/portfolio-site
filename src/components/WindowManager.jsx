@@ -34,6 +34,7 @@ function WindowManager() {
                   name={file.name}
                   startWidth={600}
                   autoHeight
+                  allowBlur={false}
                   windowId={file.id}
                   key={file.id}
                   close={closeWindow}
