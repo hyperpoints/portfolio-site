@@ -5,6 +5,11 @@
     "link": "images/rainy-leaves.gif"
   },
   {
+    "name": "screenshots",
+    "type": "folder",
+    "link": "images/screenshots"
+  },
+  {
     "name": "underwater.gif",
     "type": "image",
     "link": "images/underwater.gif"
