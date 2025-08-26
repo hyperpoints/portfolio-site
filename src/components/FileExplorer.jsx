@@ -11,13 +11,23 @@ function FileExplorer({ folder }) {
   const [openFolder, setOpenFolder] = useState(folder)
 
   useEffect(() => {
-    fetch(`/${openFolder}/manifest.json`) // Note: no /public in the path
-      .then((response) => response.json())
-      .then((data) => {
-        setFileList(data)
-      })
-    // update the filePath
-    setFilePathList(openFolder.split("/"))
+    if (openFolder !== "public") {
+      fetch(`/${openFolder}/manifest.json`) // Note: no /public in the path
+        .then((response) => response.json())
+        .then((data) => {
+          setFileList(data)
+        })
+      // update the filePath
+      setFilePathList(openFolder.split("/"))
+    } else {
+      fetch(`manifest.json`) // Note: no /public in the path
+        .then((response) => response.json())
+        .then((data) => {
+          setFileList(data)
+        })
+      // update the filePath
+      setFilePathList([])
+    }
   }, [openFolder])
 
   const openWindow = (file) => {
@@ -29,19 +39,32 @@ function FileExplorer({ folder }) {
   }
 
   const renderFilePath = () => {
-    return filePathList.map((folder, i) => {
-      return (
-        <li
-          key={i}
-          onClick={() => {
-            let currentPath = filePathList.slice(0, i + 1).join("/")
-            setOpenFolder(currentPath)
-          }}
-        >
-          {folder}
-        </li>
-      )
-    })
+    // please note:
+    // we add the /public item seperately since
+    // it is a special case with its own handling
+    return [
+      <li
+        key={-1}
+        onClick={() => {
+          setOpenFolder("public")
+        }}
+      >
+        {"public"}
+      </li>,
+      ...filePathList.map((folder, i) => {
+        return (
+          <li
+            key={i}
+            onClick={() => {
+              let currentPath = filePathList.slice(0, i + 1).join("/")
+              setOpenFolder(currentPath)
+            }}
+          >
+            {folder}
+          </li>
+        )
+      }),
+    ]
   }
 
   const renderFileList = useMemo(() => {
@@ -52,7 +75,6 @@ function FileExplorer({ folder }) {
             <li
               className="file-item"
               key={index}
-              // onDoubleClick={() => openWindow(file)}
               onDoubleClick={() => setOpenFolder(file.link)}
             >
               <Folder className="file-explorer-folder" size={18} />
