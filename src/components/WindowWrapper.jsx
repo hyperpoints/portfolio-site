@@ -127,9 +127,11 @@ export default function WindowWrapper({
             }}
             style={{
               // padding: "5px",
-              backgroundColor: "#FF605C",
+              // backgroundColor: "#FF605C",
+              backgroundColor: "#f9844a",
+
               color: "black",
-              borderRadius: "100%",
+              borderRadius: "10%",
             }}
           >
             <X size={9} />
@@ -138,9 +140,10 @@ export default function WindowWrapper({
             onClick={() => console.log("minimize button clicked: ", name)}
             style={{
               // padding: "5px",
-              backgroundColor: "#FFBD44",
+              // backgroundColor: "#FFBD44",
+              backgroundColor: "#f9c74f",
               color: "black",
-              borderRadius: "100%",
+              borderRadius: "10%",
             }}
           >
             <Minus size={9}></Minus>
@@ -149,9 +152,10 @@ export default function WindowWrapper({
             onClick={() => console.log("fullscreen button clicked: ", name)}
             style={{
               // padding: "5px",
-              backgroundColor: "#00CA4E",
+              // backgroundColor: "#00CA4E",
+              backgroundColor: "#90be6d",
               color: "black",
-              borderRadius: "100%",
+              borderRadius: "10%",
             }}
           >
             <Maximize2 size={9} style={{ transform: "scaleX(-1)" }}></Maximize2>
