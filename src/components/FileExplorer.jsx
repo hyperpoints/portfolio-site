@@ -4,21 +4,21 @@ import { File, Folder } from "lucide-react"
 // import WindowWrapper from "../components/WindowWrapper"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 
-function FileExplorer({ folder }) {
+function FileExplorer({ path }) {
   const { setOpenWindows, openWindows } = useFileSystemContext()
   const [fileList, setFileList] = useState([])
   const [filePathList, setFilePathList] = useState([])
-  const [openFolder, setOpenFolder] = useState(folder)
+  const [activeFilePath, setActiveFilePath] = useState(path)
 
   useEffect(() => {
-    if (openFolder !== "public") {
-      fetch(`/${openFolder}/manifest.json`) // Note: no /public in the path
+    if (activeFilePath !== "public") {
+      fetch(`/${activeFilePath}/manifest.json`) // Note: no /public in the path
         .then((response) => response.json())
         .then((data) => {
           setFileList(data)
         })
       // update the filePath
-      setFilePathList(openFolder.split("/"))
+      setFilePathList(activeFilePath.split("/"))
     } else {
       fetch(`manifest.json`) // Note: no /public in the path
         .then((response) => response.json())
@@ -28,7 +28,7 @@ function FileExplorer({ folder }) {
       // update the filePath
       setFilePathList([])
     }
-  }, [openFolder])
+  }, [activeFilePath])
 
   const openWindow = (file) => {
     // generate a unique id for this window
@@ -46,7 +46,7 @@ function FileExplorer({ folder }) {
       <li
         key={-1}
         onClick={() => {
-          setOpenFolder("public")
+          setActiveFilePath("public")
         }}
       >
         {"public"}
@@ -57,7 +57,7 @@ function FileExplorer({ folder }) {
             key={i}
             onClick={() => {
               let currentPath = filePathList.slice(0, i + 1).join("/")
-              setOpenFolder(currentPath)
+              setActiveFilePath(currentPath)
             }}
           >
             {folder}
@@ -75,7 +75,7 @@ function FileExplorer({ folder }) {
             <li
               className="file-item"
               key={index}
-              onDoubleClick={() => setOpenFolder(file.link)}
+              onDoubleClick={() => setActiveFilePath(file.link)}
             >
               <Folder className="file-explorer-folder" size={18} />
               {file.name}

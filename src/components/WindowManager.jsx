@@ -25,7 +25,7 @@ function WindowManager() {
                   key={file.id}
                   close={closeWindow}
                 >
-                  <FileExplorer folder={file.link} />
+                  <FileExplorer path={file.link} />
                 </WindowWrapper>
               )
             case "image":
