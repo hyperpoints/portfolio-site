@@ -11,7 +11,8 @@ function generateManifests(dirPath) {
     // Skip the script itself and any manifest files
     if (
       item.name === "generate-manifests.js" ||
-      item.name === "manifest.json"
+      item.name === "manifest.json" ||
+      item.name == ".DS_Store"
     ) {
       return
     }
@@ -50,6 +51,11 @@ function generateManifests(dirPath) {
           })
           break
         default:
+          manifest.push({
+            name: item.name,
+            type: "file",
+            link: fileLink,
+          })
           break
       }
     }
