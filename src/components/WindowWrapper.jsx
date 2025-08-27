@@ -11,7 +11,7 @@ export default function WindowWrapper({
   autoHeight = false,
   startHeight = 300,
   startWidth = 500,
-  allowBlur = true,
+  // allowBlur = true,
   windowId, // each window should have a unique id
   close,
 }) {
@@ -186,11 +186,11 @@ export default function WindowWrapper({
             height: "100%",
             background: "#ccc",
             pointerEvents: !isFocused ? "none" : null,
-            filter:
-              !isFocused && allowBlur
-                ? "grayscale(30%) blur(0.4px)"
-                : undefined,
-            transition: "filter 0.2s ease, opacity 0.2s ease",
+            // filter:
+            //   !isFocused && allowBlur
+            //     ? "grayscale(30%) blur(0.4px)"
+            //     : undefined,
+            // transition: "filter 0.2s ease, opacity 0.2s ease",
           }}
         >
           {children}
