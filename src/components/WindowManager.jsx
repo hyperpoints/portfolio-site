@@ -9,17 +9,18 @@ function WindowManager() {
 
   const closeWindow = (windowId) => {
     setOpenWindows([...openWindows.filter((file) => file.id !== windowId)])
-    setWindowOrder([...windowOrder.filter((id) => id != windowId)])
   }
 
   useEffect(() => {
     // initialize window order
     if (windowOrder.length < 1) {
       setWindowOrder([...openWindows.map((window) => window.id)])
-    } else if (openWindows) {
+    } else if (openWindows.length > 0) {
       // update window order with new window
       let newWindow = openWindows[openWindows.length - 1]
-      setWindowOrder([...windowOrder, newWindow.id])
+      if (newWindow && !windowOrder.includes(newWindow.id)) {
+        setWindowOrder([...windowOrder, newWindow.id])
+      }
     }
   }, [openWindows])
 

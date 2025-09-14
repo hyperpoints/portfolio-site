@@ -61,7 +61,9 @@ export default function WindowWrapper({
   }, [isDragging, size, setIsAnyDragging])
 
   useEffect(() => {
-    setZIndex(windowOrder.indexOf(windowId))
+    if (windowOrder.includes(windowId)) {
+      setZIndex(windowOrder.indexOf(windowId))
+    }
   }, [windowOrder])
 
   const startDrag = (e) => {
@@ -86,7 +88,10 @@ export default function WindowWrapper({
       setFocusedId(windowId)
     }
     // update window order (zindex)
-    setWindowOrder([...windowOrder.filter((id) => id !== windowId), windowId])
+    let lastWindow = windowOrder[windowOrder.length - 1]
+    if (windowId !== lastWindow) {
+      setWindowOrder([...windowOrder.filter((id) => id !== windowId), windowId])
+    }
   }
 
   const sizeRef = useRef(size)
@@ -139,6 +144,7 @@ export default function WindowWrapper({
         <div className="window-buttons">
           <button
             onClick={() => {
+              setWindowOrder([...windowOrder.filter((id) => id !== windowId)])
               close(windowId)
             }}
             style={{
