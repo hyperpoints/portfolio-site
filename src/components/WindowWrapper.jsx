@@ -3,8 +3,6 @@ import { useFileSystemContext } from "../contexts/FileSystemContext"
 import "./styles/window.less"
 import { Maximize2, Minus, X } from "lucide-react"
 
-let nextZ = 1
-
 export default function WindowWrapper({
   name = "Window",
   children,
@@ -15,10 +13,16 @@ export default function WindowWrapper({
   windowId, // each window should have a unique id
   close,
 }) {
-  const { focusedId, setFocusedId, isAnyDragging, setIsAnyDragging } =
-    useFileSystemContext()
+  const {
+    focusedId,
+    setFocusedId,
+    isAnyDragging,
+    setIsAnyDragging,
+    windowOrder,
+    setWindowOrder,
+  } = useFileSystemContext()
   const ref = useRef(null)
-  const [zIndex, setZIndex] = useState(nextZ++)
+  const [zIndex, setZIndex] = useState(windowOrder.indexOf(windowId))
   const [position, setPosition] = useState({
     x: window.innerWidth / 3,
     y: 200,
@@ -56,6 +60,10 @@ export default function WindowWrapper({
     }
   }, [isDragging, size, setIsAnyDragging])
 
+  useEffect(() => {
+    setZIndex(windowOrder.indexOf(windowId))
+  }, [windowOrder])
+
   const startDrag = (e) => {
     if (!isAnyDragging) {
       offset.current = {
@@ -77,7 +85,8 @@ export default function WindowWrapper({
     if (focusedId !== windowId) {
       setFocusedId(windowId)
     }
-    setZIndex(nextZ++)
+    // update window order (zindex)
+    setWindowOrder([...windowOrder.filter((id) => id !== windowId), windowId])
   }
 
   const sizeRef = useRef(size)

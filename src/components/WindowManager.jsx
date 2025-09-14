@@ -1,14 +1,27 @@
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import WindowWrapper from "../components/WindowWrapper"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 import FileExplorer from "./FileExplorer"
 
 function WindowManager() {
-  const { setOpenWindows, openWindows } = useFileSystemContext()
+  const { setOpenWindows, openWindows, setWindowOrder, windowOrder } =
+    useFileSystemContext()
 
   const closeWindow = (windowId) => {
     setOpenWindows([...openWindows.filter((file) => file.id !== windowId)])
+    setWindowOrder([...windowOrder.filter((id) => id != windowId)])
   }
+
+  useEffect(() => {
+    // initialize window order
+    if (windowOrder.length < 1) {
+      setWindowOrder([...openWindows.map((window) => window.id)])
+    } else if (openWindows) {
+      // update window order with new window
+      let newWindow = openWindows[openWindows.length - 1]
+      setWindowOrder([...windowOrder, newWindow.id])
+    }
+  }, [openWindows])
 
   const renderWindows = useMemo(() => {
     if (openWindows) {
