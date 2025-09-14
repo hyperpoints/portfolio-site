@@ -1,5 +1,0 @@
-i was just thinking. it should be possible to create a special type of file within this portfolio file system where you can point to a manifest.json hosted elsewhere on the internet, and then load files from that file system just as readily as from this one?
-
-imagine there's a whole other file system hosted elsewhere. you could simply create a special entry in the manifest.json or perhaps a special file extension which would be processed as a hyperfile or something, to load a whole other publicly facing file system inside of this one
-
-that could be pretty awesome right? it makes a certain kind of sense when you think about it
