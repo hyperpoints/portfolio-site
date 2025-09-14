@@ -59,6 +59,7 @@ function WindowManager() {
                   windowId={file.id}
                   key={file.id}
                   close={closeWindow}
+                  allowBlur={true}
                 >
                   <iframe
                     src={file.link}

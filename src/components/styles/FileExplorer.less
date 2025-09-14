@@ -1,15 +1,19 @@
 .file-explorer-container {
   height: 100%;
+  width: 100%;
   background-color: #272727;
-  padding: 12px 12px;
   overflow: scroll;
 
   .file-path-list {
-    margin: 1px 7px 7px;
+    padding: 7px 7px 7px;
+    position: absolute;
+    width: 100%;
+    background-color: black;
 
     li {
       display: inline;
-      color: #50be75;
+      color: #7be0e9;
+      // color: #50be75;
       // color: #43aa8b;
       cursor: pointer;
       user-select: none;
@@ -17,21 +21,24 @@
 
     li:hover {
       // color: #31ff2a;
-      color: #90be6d;
+      // color: #90be6d;
+      color: #8feff8;
       transition: 0.1s ease-in-out;
     }
 
     li::after {
       content: "/";
       padding: 3px;
-      color: white;
+      color: #7be0e9;
     }
   }
 
   .file-list {
     background-color: #272727;
     color: white;
+    margin-top: 35px;
     margin-bottom: 10px;
+    padding: 12px;
   }
 
   .file-item {
@@ -53,17 +60,18 @@
     }
 
     svg.file-explorer-folder {
-      // fill: #7be0e9;
-      // stroke: #8feff8;
-      stroke: #50be75;
-      fill: #45a565;
+      fill: #7be0e9;
+      stroke: #8feff8;
+      // stroke: #50be75;
+      // fill: #45a565;
       stroke-width: 0.3px;
     }
   }
 
   .file-item:hover {
     // color: #a0abd9;
-    color: #50be75;
+    // color: #50be75;
+    color: #8feff8;
     transition: 0.1s ease-in-out;
   }
 }

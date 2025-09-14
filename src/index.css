@@ -8,7 +8,9 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   /* background-color: #242424; */
-  background-image: url("/images/wallpaper/rainforest-image.jpg");
+  /* background-image: url("/images/wallpaper/rainforest-image.jpg"); */
+  background-image: url("/images/wallpaper/abstract-wallpaper.jpg");
+  /* background-image: url("/images/wallpaper/warmth.jpeg"); */
   background-size: cover;
 
   font-synthesis: none;

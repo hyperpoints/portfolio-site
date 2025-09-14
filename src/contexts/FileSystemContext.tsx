@@ -8,6 +8,7 @@ export function FileSystemProvider({ children }) {
   const [isAnyDragging, setIsAnyDragging] = useState(false)
   const [iconlist, setIconlist] = useState([])
   const [openWindows, setOpenWindows] = useState([])
+  const [windowOrder, setWindowOrder] = useState([])
 
   return (
     <FileSystemContext.Provider
@@ -20,6 +21,8 @@ export function FileSystemProvider({ children }) {
         setIconlist,
         openWindows,
         setOpenWindows,
+        windowOrder,
+        setWindowOrder,
       }}
     >
       {children}

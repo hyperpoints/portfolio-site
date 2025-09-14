@@ -11,7 +11,7 @@ export default function WindowWrapper({
   autoHeight = false,
   startHeight = 300,
   startWidth = 500,
-  // allowBlur = true,
+  allowBlur = false,
   windowId, // each window should have a unique id
   close,
 }) {
@@ -67,11 +67,17 @@ export default function WindowWrapper({
     }
   }
 
+  const focus = () => {
+    if (focusedId !== windowId && !allowBlur) {
+      setFocusedId(windowId)
+    }
+  }
+
   const raise = () => {
     if (focusedId !== windowId) {
       setFocusedId(windowId)
-      setZIndex(nextZ++)
     }
+    setZIndex(nextZ++)
   }
 
   const sizeRef = useRef(size)
@@ -118,6 +124,7 @@ export default function WindowWrapper({
         zIndex,
       }}
       onMouseDown={raise}
+      onMouseEnter={focus}
     >
       <div className="window-titlebar" onMouseDown={startDrag}>
         <div className="window-buttons">
@@ -185,12 +192,12 @@ export default function WindowWrapper({
           style={{
             height: "100%",
             background: "#ccc",
-            pointerEvents: !isFocused ? "none" : null,
-            // filter:
-            //   !isFocused && allowBlur
-            //     ? "grayscale(30%) blur(0.4px)"
-            //     : undefined,
-            // transition: "filter 0.2s ease, opacity 0.2s ease",
+            pointerEvents: !isFocused && allowBlur ? "none" : null,
+            filter:
+              !isFocused && allowBlur
+                ? "grayscale(30%) blur(0.7px)"
+                : undefined,
+            transition: "filter 0.2s ease, opacity 0.2s ease",
           }}
         >
           {children}
