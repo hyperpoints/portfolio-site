@@ -1,5 +1,10 @@
 [
   {
+    "name": "GLORBO.png",
+    "type": "image",
+    "link": "GLORBO.png"
+  },
+  {
     "name": "images",
     "type": "folder",
     "link": "images"
@@ -13,5 +18,10 @@
     "name": "projects",
     "type": "folder",
     "link": "projects"
+  },
+  {
+    "name": "walk-cycle.png",
+    "type": "image",
+    "link": "walk-cycle.png"
   }
 ]
