@@ -9,8 +9,9 @@
   color: rgba(255, 255, 255, 0.87);
   /* background-color: #242424; */
   /* background-image: url("/images/wallpaper/rainforest-image.jpg"); */
-  background-image: url("/images/wallpaper/abstract-wallpaper.jpg");
+  /* background-image: url("/images/wallpaper/abstract-wallpaper.jpg"); */
   /* background-image: url("/images/wallpaper/warmth.jpeg"); */
+  background-image: url("/images/screenshots/2025-04-05_19.46.28.png");
   background-size: cover;
 
   font-synthesis: none;
@@ -34,7 +35,7 @@ body {
   /* place-items: center; */
   /* min-width: 320px; */
   min-height: 100vh;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 h1 {
