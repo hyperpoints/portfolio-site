@@ -1,18 +1,8 @@
 [
   {
-    "name": "GLORBO.png",
-    "type": "image",
-    "link": "GLORBO.png"
-  },
-  {
     "name": "images",
     "type": "folder",
     "link": "images"
-  },
-  {
-    "name": "infinity-coin.png",
-    "type": "image",
-    "link": "infinity-coin.png"
   },
   {
     "name": "projects",
@@ -23,5 +13,15 @@
     "name": "walk-cycle.png",
     "type": "image",
     "link": "walk-cycle.png"
+  },
+  {
+    "name": "infinity-coin.png",
+    "type": "image",
+    "link": "infinity-coin.png"
+  },
+  {
+    "name": "GLORBO.png",
+    "type": "image",
+    "link": "GLORBO.png"
   }
 ]

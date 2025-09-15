@@ -1,13 +1,13 @@
 [
   {
-    "name": "rainy-leaves.gif",
-    "type": "image",
-    "link": "images/rainy-leaves.gif"
-  },
-  {
     "name": "screenshots",
     "type": "folder",
     "link": "images/screenshots"
+  },
+  {
+    "name": "wallpaper",
+    "type": "folder",
+    "link": "images/wallpaper"
   },
   {
     "name": "underwater.gif",
@@ -15,8 +15,8 @@
     "link": "images/underwater.gif"
   },
   {
-    "name": "wallpaper",
-    "type": "folder",
-    "link": "images/wallpaper"
+    "name": "rainy-leaves.gif",
+    "type": "image",
+    "link": "images/rainy-leaves.gif"
   }
 ]
