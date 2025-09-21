@@ -11,11 +11,13 @@ function FileExplorer({ path }) {
   const [activeFilePath, setActiveFilePath] = useState(path)
 
   useEffect(() => {
+    console.log("activeFilePath", activeFilePath)
     if (activeFilePath !== "public") {
       fetch(`/${activeFilePath}/manifest.json`) // Note: no /public in the path
         .then((response) => response.json())
         .then((data) => {
           setFileList(data)
+          console.log("data 1: ", data)
         })
       // update the filePath
       setFilePathList(activeFilePath.split("/"))
@@ -24,6 +26,7 @@ function FileExplorer({ path }) {
         .then((response) => response.json())
         .then((data) => {
           setFileList(data)
+          console.log("data 2: ", data)
         })
       // update the filePath
       setFilePathList([])
