@@ -13,7 +13,7 @@ function FileExplorer({ path }) {
   useEffect(() => {
     console.log("activeFilePath", activeFilePath)
     if (activeFilePath !== "public") {
-      fetch(`/${activeFilePath}/manifest.json`) // Note: no /public in the path
+      fetch(`/portfolio-site/${activeFilePath}/manifest.json`) // Note: no /public in the path
         .then((response) => response.json())
         .then((data) => {
           setFileList(data)
