@@ -24,7 +24,7 @@ export default function WindowWrapper({
   const ref = useRef(null)
   const [zIndex, setZIndex] = useState(windowOrder.indexOf(windowId))
   const [position, setPosition] = useState({
-    x: window.innerWidth / 3,
+    x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
     y: 200,
   })
   const [size, setSize] = useState({ width: startWidth, height: startHeight })
