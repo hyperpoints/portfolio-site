@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react"
 import WindowWrapper from "../components/WindowWrapper"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 import FileExplorer from "./FileExplorer"
+import "./styles/window.less"
 
 function WindowManager() {
   const { setOpenWindows, openWindows, setWindowOrder, windowOrder } =
@@ -92,7 +93,7 @@ function WindowManager() {
     }
   }, [openWindows])
 
-  return <>{renderWindows}</>
+  return <div className="window-manager">{renderWindows}</div>
 }
 
 export default WindowManager

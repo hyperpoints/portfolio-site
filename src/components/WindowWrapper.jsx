@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
-import "./styles/window.less"
 import { Maximize2, Minus, X } from "lucide-react"
 
 export default function WindowWrapper({
@@ -48,7 +47,11 @@ export default function WindowWrapper({
         0,
         Math.min(newX, window.innerWidth - size.width)
       )
-      const clampedY = Math.max(0, Math.min(newY, window.innerHeight - 30)) // 30 = titlebar height
+      // const clampedY = Math.max(0, Math.min(newY, window.innerHeight - 30)) // 30 = titlebar height
+      const clampedY = Math.max(
+        0,
+        Math.min(newY, document.documentElement.clientHeight - 30)
+      ) // 30 = titlebar height
       setPosition({ x: clampedX, y: clampedY })
     }
 
