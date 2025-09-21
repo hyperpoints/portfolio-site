@@ -31,32 +31,45 @@ export default function WindowWrapper({
   const [isDragging, setDragging] = useState(false)
   const offset = useRef({ x: 0, y: 0 })
   const isFocused = focusedId === windowId
+  const dragStartEvent = useRef(null) // Track if it was touch or mouse
 
   useEffect(() => {
     setFocusedId(windowId)
-    const onMouseMove = (e) => {
+    const onMove = (e) => {
       if (!isDragging) return
-      const newX = e.clientX - offset.current.x
-      const newY = e.clientY - offset.current.y
+
+      // Handle both mouse and touch events
+      const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
+      const clientY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY
+
+      const newX = clientX - offset.current.x
+      const newY = clientY - offset.current.y
       const clampedX = Math.max(
         0,
         Math.min(newX, window.innerWidth - size.width)
       )
-      // const clampedY = Math.max(0, Math.min(newY, window.innerHeight - size.height));
       const clampedY = Math.max(0, Math.min(newY, window.innerHeight - 30)) // 30 = titlebar height
       setPosition({ x: clampedX, y: clampedY })
     }
 
-    const onMouseUp = () => {
+    const onEnd = () => {
       setDragging(false)
       setIsAnyDragging(false)
+      dragStartEvent.current = null
     }
 
-    document.addEventListener("mousemove", onMouseMove)
-    document.addEventListener("mouseup", onMouseUp)
+    document.addEventListener("mousemove", onMove)
+    document.addEventListener("touchmove", onMove, { passive: false })
+    document.addEventListener("mouseup", onEnd)
+    document.addEventListener("touchend", onEnd)
+    document.addEventListener("touchcancel", onEnd)
+
     return () => {
-      document.removeEventListener("mousemove", onMouseMove)
-      document.removeEventListener("mouseup", onMouseUp)
+      document.removeEventListener("mousemove", onMove)
+      document.removeEventListener("touchmove", onMove)
+      document.removeEventListener("mouseup", onEnd)
+      document.removeEventListener("touchend", onEnd)
+      document.removeEventListener("touchcancel", onEnd)
     }
   }, [isDragging, size, setIsAnyDragging])
 
@@ -67,10 +80,23 @@ export default function WindowWrapper({
   }, [windowOrder])
 
   const startDrag = (e) => {
+    // Prevent handling both mouse and touch events for the same action
+    if (dragStartEvent.current && dragStartEvent.current !== e.type) return
+
     if (!isAnyDragging) {
+      dragStartEvent.current = e.type
+
+      // Prevent default on touch to avoid scrolling
+      if (e.type === "touchstart") {
+        e.preventDefault()
+      }
+
+      const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
+      const clientY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY
+
       offset.current = {
-        x: e.clientX - position.x,
-        y: e.clientY - position.y,
+        x: clientX - position.x,
+        y: clientY - position.y,
       }
       setIsAnyDragging(true)
       setDragging(true)
@@ -83,7 +109,10 @@ export default function WindowWrapper({
     }
   }
 
-  const raise = () => {
+  const raise = (e) => {
+    // Prevent handling both mouse and touch events for the same action
+    if (dragStartEvent.current && dragStartEvent.current !== e.type) return
+
     if (focusedId !== windowId) {
       setFocusedId(windowId)
     }
@@ -95,18 +124,34 @@ export default function WindowWrapper({
   }
 
   const sizeRef = useRef(size)
+  const resizeStartEvent = useRef(null)
 
   const startResize = (e) => {
-    e.preventDefault()
-    const startX = e.clientX
-    const startY = e.clientY
+    // Prevent handling both mouse and touch events for the same action
+    if (resizeStartEvent.current && resizeStartEvent.current !== e.type) return
+
+    resizeStartEvent.current = e.type
+
+    // Prevent default on touch to avoid scrolling
+    if (e.type === "touchstart") {
+      e.preventDefault()
+    }
+
+    const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
+    const clientY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY
+
+    const startX = clientX
+    const startY = clientY
     const startWidth = size.width
     const startHeight = size.height
     setIsAnyDragging(true)
 
     const doResize = (e) => {
-      const newWidth = Math.max(200, startWidth + (e.clientX - startX))
-      const newHeight = Math.max(100, startHeight + (e.clientY - startY))
+      const moveX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
+      const moveY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY
+
+      const newWidth = Math.max(200, startWidth + (moveX - startX))
+      const newHeight = Math.max(100, startHeight + (moveY - startY))
       sizeRef.current = { width: newWidth, height: newHeight }
       // Force an update using requestAnimationFrame for smoother feedback
       requestAnimationFrame(() => {
@@ -116,13 +161,20 @@ export default function WindowWrapper({
 
     const stopResize = () => {
       window.removeEventListener("mousemove", doResize)
+      window.removeEventListener("touchmove", doResize)
       window.removeEventListener("mouseup", stopResize)
+      window.removeEventListener("touchend", stopResize)
+      window.removeEventListener("touchcancel", stopResize)
       window.removeEventListener("mouseleave", stopResize)
       setIsAnyDragging(false)
+      resizeStartEvent.current = null
     }
 
     window.addEventListener("mousemove", doResize)
+    window.addEventListener("touchmove", doResize, { passive: false })
     window.addEventListener("mouseup", stopResize)
+    window.addEventListener("touchend", stopResize)
+    window.addEventListener("touchcancel", stopResize)
     window.addEventListener("mouseleave", stopResize)
   }
 
@@ -136,22 +188,31 @@ export default function WindowWrapper({
         width: size.width,
         height: autoHeight ? "auto" : size.height,
         zIndex,
+        touchAction: "none", // Prevent browser touch actions like scrolling
       }}
       onMouseDown={raise}
+      onTouchStart={raise}
       onMouseEnter={focus}
     >
-      <div className="window-titlebar" onMouseDown={startDrag}>
+      <div
+        className="window-titlebar"
+        onMouseDown={startDrag}
+        onTouchStart={startDrag}
+      >
         <div className="window-buttons">
           <button
             onClick={() => {
               setWindowOrder([...windowOrder.filter((id) => id !== windowId)])
               close(windowId)
             }}
+            onTouchEnd={(e) => {
+              // Handle touch equivalent of click
+              e.preventDefault()
+              setWindowOrder([...windowOrder.filter((id) => id !== windowId)])
+              close(windowId)
+            }}
             style={{
-              // padding: "5px",
-              // backgroundColor: "#FF605C",
               backgroundColor: "#f9844a",
-
               color: "black",
               borderRadius: "10%",
             }}
@@ -160,9 +221,11 @@ export default function WindowWrapper({
           </button>
           <button
             onClick={() => console.log("minimize button clicked: ", name)}
+            onTouchEnd={(e) => {
+              e.preventDefault()
+              console.log("minimize button clicked: ", name)
+            }}
             style={{
-              // padding: "5px",
-              // backgroundColor: "#FFBD44",
               backgroundColor: "#f9c74f",
               color: "black",
               borderRadius: "10%",
@@ -172,9 +235,11 @@ export default function WindowWrapper({
           </button>
           <button
             onClick={() => console.log("fullscreen button clicked: ", name)}
+            onTouchEnd={(e) => {
+              e.preventDefault()
+              console.log("fullscreen button clicked: ", name)
+            }}
             style={{
-              // padding: "5px",
-              // backgroundColor: "#00CA4E",
               backgroundColor: "#90be6d",
               color: "black",
               borderRadius: "10%",
@@ -189,6 +254,7 @@ export default function WindowWrapper({
         className="window-body"
         style={{ position: "relative", height: "100%" }}
         onClick={raise}
+        onTouchStart={raise}
       >
         {isDragging && (
           <div
@@ -217,7 +283,11 @@ export default function WindowWrapper({
         >
           {children}
         </div>
-        <div className="window-resizer" onMouseDown={startResize} />
+        <div
+          className="window-resizer"
+          onMouseDown={startResize}
+          onTouchStart={startResize}
+        />
       </div>
     </div>
   )
