@@ -24,6 +24,10 @@
   /* cursor: move; */
   user-select: none;
   font-weight: bold;
+
+  /* Addding these properties for mobile safety */
+  box-sizing: border-box; /* ← Include padding in width calculation */
+  min-width: 0; /* ← Allow content to be constrained */
 }
 
 .window-buttons {
@@ -83,7 +87,7 @@
   background-color: #333;
   /* padding: 1rem; */
   /* height: calc(100% - 30px); */
-  overflow: hidden;
+  // overflow: hidden;
   border: 1px solid #333;
   border-radius: 0 0 6px 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
