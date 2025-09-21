@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
-import { File, FolderClosed } from "lucide-react"
+import { File, FileSymlink, FolderClosed } from "lucide-react"
 import "./styles/FileIcons.less"
 
 export default function FileIcons() {
@@ -28,35 +28,54 @@ export default function FileIcons() {
       return iconlist.map((file) => {
         if (file.display == false) return
         // handle folders in their own way
-        if (file.type !== "folder") {
-          return (
-            <div
-              className="file"
-              onDoubleClick={() => openWindow(file)}
-              key={file.name}
-            >
-              <button>
-                <File className="file-icons-file" size={60}></File>
-              </button>
-              <p className="file-label">{file.name}</p>
-            </div>
-          )
-        } else {
-          return (
-            <div
-              className="file"
-              onDoubleClick={() => openWindow(file)}
-              key={file.name}
-            >
-              <button>
-                <FolderClosed
-                  className="file-icons-folder"
-                  size={60}
-                ></FolderClosed>
-              </button>
-              <p className="file-label">{file.name}</p>
-            </div>
-          )
+        switch (file.type) {
+          case "folder":
+            return (
+              <div
+                className="file"
+                onDoubleClick={() => openWindow(file)}
+                key={file.name}
+              >
+                <button>
+                  <FolderClosed
+                    className="file-icons-folder"
+                    size={60}
+                  ></FolderClosed>
+                </button>
+                <p className="file-label">{file.name}</p>
+              </div>
+            )
+          case "link":
+            return (
+              <div
+                className="file"
+                onDoubleClick={() => window.open(file.link, "_blank")}
+                key={file.name}
+              >
+                <button>
+                  <FileSymlink
+                    className="file-icons-link"
+                    size={60}
+                    color="white"
+                  ></FileSymlink>
+                </button>
+                <p className="file-label">{file.name}</p>
+              </div>
+            )
+          case "file":
+          default:
+            return (
+              <div
+                className="file"
+                onDoubleClick={() => openWindow(file)}
+                key={file.name}
+              >
+                <button>
+                  <File className="file-icons-file" size={60}></File>
+                </button>
+                <p className="file-label">{file.name}</p>
+              </div>
+            )
         }
       })
     }

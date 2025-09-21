@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import "./styles/FileExplorer.less"
-import { File, Folder } from "lucide-react"
+import { File, FileSymlink, Folder } from "lucide-react"
 // import WindowWrapper from "../components/WindowWrapper"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 
@@ -70,28 +70,41 @@ function FileExplorer({ path }) {
   const renderFileList = useMemo(() => {
     if (fileList) {
       return fileList.map((file, index) => {
-        if (file.type == "folder") {
-          return (
-            <li
-              className="file-item"
-              key={index}
-              onDoubleClick={() => setActiveFilePath(file.link)}
-            >
-              <Folder className="file-explorer-folder" size={18} />
-              {file.name}
-            </li>
-          )
-        } else {
-          return (
-            <li
-              className="file-item"
-              key={index}
-              onDoubleClick={() => openWindow(file)}
-            >
-              <File className="file-explorer-file" size={18} />
-              {file.name}
-            </li>
-          )
+        switch (file.type) {
+          case "folder":
+            return (
+              <li
+                className="file-item"
+                key={index}
+                onDoubleClick={() => setActiveFilePath(file.link)}
+              >
+                <Folder className="file-explorer-folder" size={18} />
+                {file.name}
+              </li>
+            )
+          case "link":
+            return (
+              <li
+                className="file-item"
+                key={index}
+                onDoubleClick={() => window.open(file.link, "_blank")}
+              >
+                <FileSymlink className="file-explorer-link" size={18} />
+                {file.name}
+              </li>
+            )
+          case "file":
+          default:
+            return (
+              <li
+                className="file-item"
+                key={index}
+                onDoubleClick={() => openWindow(file)}
+              >
+                <File className="file-explorer-file" size={18} />
+                {file.name}
+              </li>
+            )
         }
       })
     }

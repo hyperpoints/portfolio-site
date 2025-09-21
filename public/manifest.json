@@ -10,6 +10,11 @@
     "link": "projects"
   },
   {
+    "name": "synthona",
+    "type": "link",
+    "link": "https://hyperpoints.itch.io/synthona"
+  },
+  {
     "name": "walk-cycle.png",
     "type": "image",
     "link": "walk-cycle.png"
