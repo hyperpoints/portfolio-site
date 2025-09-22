@@ -215,7 +215,7 @@ export default function WindowWrapper({
           >
             <X size={9} />
           </button>
-          <button
+          {/* <button
             onClick={() => console.log("minimize button clicked: ", name)}
             onTouchEnd={(e) => {
               e.preventDefault()
@@ -242,7 +242,7 @@ export default function WindowWrapper({
             }}
           >
             <Maximize2 size={9} style={{ transform: "scaleX(-1)" }}></Maximize2>
-          </button>
+          </button> */}
         </div>
         <div className="window-name">{name}</div>
       </div>
