@@ -24,7 +24,7 @@ export default function WindowWrapper({
   const [zIndex, setZIndex] = useState(windowOrder.indexOf(windowId))
   const [position, setPosition] = useState({
     x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
-    y: 200,
+    y: window.innerWidth > 500 ? 200 : 0,
   })
   const [size, setSize] = useState({ width: startWidth, height: startHeight })
   const [isDragging, setDragging] = useState(false)
