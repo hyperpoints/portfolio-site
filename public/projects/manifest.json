@@ -13,5 +13,10 @@
     "name": "tables.html",
     "type": "html",
     "link": "projects/tables.html"
+  },
+  {
+    "name": "portfolio-site workflows",
+    "type": "link",
+    "link": "https://github.com/hyperpoints/portfolio-site/actions"
   }
 ]
