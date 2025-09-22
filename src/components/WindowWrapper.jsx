@@ -106,12 +106,6 @@ export default function WindowWrapper({
     }
   }
 
-  const focus = () => {
-    if (focusedId !== windowId && !allowBlur) {
-      setFocusedId(windowId)
-    }
-  }
-
   const raise = (e) => {
     // Prevent handling both mouse and touch events for the same action
     if (dragStartEvent.current && dragStartEvent.current !== e.type) return
@@ -195,7 +189,6 @@ export default function WindowWrapper({
       }}
       onMouseDown={raise}
       onTouchStart={raise}
-      onMouseEnter={focus}
     >
       <div
         className="window-titlebar"
