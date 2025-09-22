@@ -10,6 +10,11 @@
     "link": "projects"
   },
   {
+    "name": "github",
+    "type": "link",
+    "link": "https://github.com/hyperpoints"
+  },
+  {
     "name": "synthona",
     "type": "link",
     "link": "https://hyperpoints.itch.io/synthona"
