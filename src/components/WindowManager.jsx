@@ -56,6 +56,7 @@ function WindowManager() {
                 >
                   <img
                     src={file.link}
+                    onDoubleClick={() => window.open(file.link, "_blank")}
                     style={{
                       width: "100%",
                       height: "100%",
