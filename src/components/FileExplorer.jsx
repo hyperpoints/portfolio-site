@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import "./styles/FileExplorer.less"
 import { File, FileSymlink, Folder } from "lucide-react"
+import { v4 as uuidv4 } from "uuid"
 // import WindowWrapper from "../components/WindowWrapper"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 
@@ -32,7 +33,7 @@ function FileExplorer({ path, isMobile = false }) {
 
   const openWindow = (file) => {
     // generate a unique id for this window
-    const uniqueId = crypto.randomUUID()
+    const uniqueId = uuidv4()
     // Clone the file object to avoid modifying the original data
     const newFile = { ...file, id: uniqueId }
     setOpenWindows([...openWindows, newFile])

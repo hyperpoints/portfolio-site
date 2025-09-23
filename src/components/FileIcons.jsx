@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 import { File, FileSymlink, FolderClosed } from "lucide-react"
+import { v4 as uuidv4 } from "uuid"
 import "./styles/FileIcons.less"
 
 export default function FileIcons() {
@@ -17,7 +18,7 @@ export default function FileIcons() {
 
   const openWindow = (file) => {
     // generate a unique id for this window
-    const uniqueId = crypto.randomUUID()
+    const uniqueId = uuidv4()
     // Clone the file object to avoid modifying the original data
     const newFile = { ...file, id: uniqueId }
     setOpenWindows([...openWindows, newFile])

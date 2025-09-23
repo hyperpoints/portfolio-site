@@ -90,18 +90,14 @@ export default function WindowWrapper({
   const startDrag = (e) => {
     // Prevent handling both mouse and touch events for the same action
     if (dragStartEvent.current && dragStartEvent.current !== e.type) return
-
     if (!isAnyDragging) {
       dragStartEvent.current = e.type
-
       // Prevent default on touch to avoid scrolling
       if (e.type === "touchstart" && !isAnyDragging) {
         e.preventDefault()
       }
-
       const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
       const clientY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY
-
       offset.current = {
         x: clientX - position.x,
         y: clientY - position.y,
@@ -220,7 +216,7 @@ export default function WindowWrapper({
         className="window-titlebar"
         onDoubleClick={maximize}
         onMouseDown={startDrag}
-        onTouchStart={startDrag}
+        onTouchMove={startDrag}
       >
         <div className="window-buttons">
           <button
