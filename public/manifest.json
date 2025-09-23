@@ -30,6 +30,11 @@
     "link": "https://github.com/hyperpoints"
   },
   {
+    "name": "portfolio-site",
+    "type": "link",
+    "link": "https://github.com/hyperpoints/portfolio-site"
+  },
+  {
     "name": "synthona",
     "type": "link",
     "link": "https://hyperpoints.itch.io/synthona"
