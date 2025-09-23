@@ -34,13 +34,19 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   /* opacity: 0.7; */
   /* cursor: move; */
-  user-select: none;
   pointer-events: auto;
+  cursor: default;
   font-weight: bold;
 
   /* Addding these properties for mobile safety */
   box-sizing: border-box; /* ← Include padding in width calculation */
   min-width: 0; /* ← Allow content to be constrained */
+}
+.window-name {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari, Chrome, Opera, Samsung */
+  touch-action: none; /* Disables default touch actions */
+  user-select: none; /* Modern browsers */
 }
 
 .window-buttons {

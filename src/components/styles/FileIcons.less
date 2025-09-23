@@ -46,7 +46,10 @@ p.file-label {
   display: -webkit-box;
   line-clamp: 2;
   -webkit-box-orient: vertical;
-  user-select: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari, Chrome, Opera, Samsung */
+  touch-action: none; /* Disables default touch actions */
+  user-select: none; /* Modern browsers */
 
   cursor: pointer;
   max-width: 100px;
