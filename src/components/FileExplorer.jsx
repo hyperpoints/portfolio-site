@@ -4,7 +4,7 @@ import { File, FileSymlink, Folder } from "lucide-react"
 // import WindowWrapper from "../components/WindowWrapper"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 
-function FileExplorer({ path }) {
+function FileExplorer({ path, isMobile = false }) {
   const { setOpenWindows, openWindows } = useFileSystemContext()
   const [fileList, setFileList] = useState([])
   const [filePathList, setFilePathList] = useState([])
@@ -111,7 +111,9 @@ function FileExplorer({ path }) {
   }, [fileList, openWindows])
 
   return (
-    <div className="file-explorer-container">
+    <div
+      className={`file-explorer-container ${isMobile ? "mobile-explorer" : ""}`}
+    >
       <ul className="file-path-list">{renderFilePath()}</ul>
       <ul className="file-list">{renderFileList}</ul>
     </div>
