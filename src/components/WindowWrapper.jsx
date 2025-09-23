@@ -40,7 +40,7 @@ export default function WindowWrapper({
   useEffect(() => {
     setFocusedId(windowId)
     const onMove = (e) => {
-      if (!isDragging) return
+      if (!isDragging) return onEnd()
 
       // Handle both mouse and touch events
       const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
