@@ -107,6 +107,12 @@ export default function WindowWrapper({
     }
   }
 
+  const cancelDrag = () => {
+    setDragging(false)
+    setIsAnyDragging(false)
+    dragStartEvent.current = null
+  }
+
   const maximize = () => {
     // if it's not full screen set it
     if (size.height !== docHeight && size.width !== docWidth) {
@@ -216,7 +222,8 @@ export default function WindowWrapper({
         className="window-titlebar"
         onDoubleClick={maximize}
         onMouseDown={startDrag}
-        onTouchMove={startDrag}
+        onTouchStart={startDrag}
+        onTouchEnd={cancelDrag}
       >
         <div className="window-buttons">
           <button
