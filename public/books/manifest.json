@@ -1,7 +1,27 @@
 [
   {
+    "name": "Frankenstein",
+    "type": "file",
+    "link": "books/Frankenstein.txt"
+  },
+  {
+    "name": "moby-dick",
+    "type": "file",
+    "link": "books/moby-dick.txt"
+  },
+  {
     "name": "pride-and-prejudice",
     "type": "file",
     "link": "books/pride-and-prejudice.txt"
+  },
+  {
+    "name": "shakespeare",
+    "type": "file",
+    "link": "books/shakespeare.txt"
+  },
+  {
+    "name": "ulysses",
+    "type": "file",
+    "link": "books/ulysses.txt"
   }
 ]
