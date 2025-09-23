@@ -209,7 +209,7 @@ export default function WindowWrapper({
         width: size.width,
         height: autoHeight ? "auto" : size.height,
         zIndex,
-        touchAction: "none", // Prevent browser touch actions like scrolling
+        // touchAction: "none", // Prevent browser touch actions like scrolling
       }}
       onMouseDown={raise}
       onTouchStart={raise}
