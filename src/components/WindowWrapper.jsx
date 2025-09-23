@@ -23,8 +23,13 @@ export default function WindowWrapper({
   const ref = useRef(null)
   const [zIndex, setZIndex] = useState(windowOrder.indexOf(windowId))
   const [position, setPosition] = useState({
-    x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
-    y: window.innerWidth > 500 ? 200 : 0,
+    // x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
+    x:
+      window.innerWidth > startWidth ? (window.innerWidth - startWidth) / 2 : 0,
+    y:
+      window.innerHeight > startHeight
+        ? (window.innerHeight - startHeight) / 2 - 100
+        : 0,
   })
   const [size, setSize] = useState({ width: startWidth, height: startHeight })
   const [isDragging, setDragging] = useState(false)
@@ -120,8 +125,14 @@ export default function WindowWrapper({
     } else {
       // otherwise set it back to the default width/height
       setPosition({
-        x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
-        y: window.innerWidth > 500 ? 200 : 0,
+        x:
+          window.innerWidth > startWidth
+            ? (window.innerWidth - startWidth) / 2
+            : 0,
+        y:
+          window.innerHeight > startHeight
+            ? (window.innerHeight - startHeight) / 2 - 100
+            : 0,
       })
       setSize({
         width: startWidth,
