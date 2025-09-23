@@ -21,15 +21,13 @@ export default function WindowWrapper({
     setWindowOrder,
   } = useFileSystemContext()
   const ref = useRef(null)
+  const docWidth = document.documentElement.clientWidth
+  const docHeight = document.documentElement.clientHeight
   const [zIndex, setZIndex] = useState(windowOrder.indexOf(windowId))
   const [position, setPosition] = useState({
     // x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
-    x:
-      window.innerWidth > startWidth ? (window.innerWidth - startWidth) / 2 : 0,
-    y:
-      window.innerWidth > 500
-        ? (window.innerHeight - startHeight) / 2 - 100
-        : 0,
+    x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
+    y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
   })
   const [size, setSize] = useState({ width: startWidth, height: startHeight })
   const [isDragging, setDragging] = useState(false)
@@ -112,9 +110,6 @@ export default function WindowWrapper({
   }
 
   const maximize = () => {
-    const docWidth = document.documentElement.clientWidth
-    const docHeight = document.documentElement.clientHeight
-
     // if it's not full screen set it
     if (size.height !== docHeight && size.width !== docWidth) {
       setPosition({ x: 0, y: 0 })
@@ -125,14 +120,8 @@ export default function WindowWrapper({
     } else {
       // otherwise set it back to the default width/height
       setPosition({
-        x:
-          window.innerWidth > startWidth
-            ? (window.innerWidth - startWidth) / 2
-            : 0,
-        y:
-          window.innerWidth > 500
-            ? (window.innerHeight - startHeight) / 2 - 100
-            : 0,
+        x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
+        y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
       })
       setSize({
         width: startWidth,
