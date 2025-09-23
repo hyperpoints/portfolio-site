@@ -25,9 +25,8 @@ export default function WindowWrapper({
   const docHeight = document.documentElement.clientHeight
   const [zIndex, setZIndex] = useState(windowOrder.indexOf(windowId))
   const [position, setPosition] = useState({
-    // x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
     x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
-    y: docWidth > 500 ? (docHeight - startHeight) / 2 : 0,
+    y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
   })
   const [size, setSize] = useState({
     width: startWidth,
@@ -95,10 +94,10 @@ export default function WindowWrapper({
     if (!isAnyDragging) {
       dragStartEvent.current = e.type
 
-      // // Prevent default on touch to avoid scrolling
-      // if (e.type === "touchstart" && !isAnyDragging) {
-      //   e.preventDefault()
-      // }
+      // Prevent default on touch to avoid scrolling
+      if (e.type === "touchstart" && !isAnyDragging) {
+        e.preventDefault()
+      }
 
       const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
       const clientY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY
@@ -124,7 +123,7 @@ export default function WindowWrapper({
       // otherwise set it back to the default width/height
       setPosition({
         x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
-        y: docWidth > 500 ? (docHeight - startHeight) / 2 : 0,
+        y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
       })
       setSize({
         width: startWidth,
@@ -156,10 +155,10 @@ export default function WindowWrapper({
 
     resizeStartEvent.current = e.type
 
-    // // Prevent default on touch to avoid scrolling
-    // if (e.type === "touchstart" && !isAnyDragging) {
-    //   e.preventDefault()
-    // }
+    // Prevent default on touch to avoid scrolling
+    if (e.type === "touchstart" && !isAnyDragging) {
+      e.preventDefault()
+    }
 
     const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX
     const clientY = e.clientY !== undefined ? e.clientY : e.touches[0].clientY
@@ -212,7 +211,7 @@ export default function WindowWrapper({
         width: size.width,
         height: autoHeight ? "auto" : size.height,
         zIndex,
-        // touchAction: isDragging ? "none" : "pan-y",
+        touchAction: isDragging ? "none" : "pan-y",
       }}
       onMouseDown={raise}
       onTouchStart={raise}
