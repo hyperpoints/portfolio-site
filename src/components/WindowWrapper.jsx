@@ -27,9 +27,12 @@ export default function WindowWrapper({
   const [position, setPosition] = useState({
     // x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
     x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
-    y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
+    y: docHeight > startHeight ? (docHeight - startHeight) / 2 : 0,
   })
-  const [size, setSize] = useState({ width: startWidth, height: startHeight })
+  const [size, setSize] = useState({
+    width: startWidth,
+    height: startHeight,
+  })
   const [isDragging, setDragging] = useState(false)
   const offset = useRef({ x: 0, y: 0 })
   const isFocused = focusedId === windowId
@@ -121,7 +124,7 @@ export default function WindowWrapper({
       // otherwise set it back to the default width/height
       setPosition({
         x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
-        y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
+        y: docWidth > 500 ? (docHeight - startHeight) / 2 : 0,
       })
       setSize({
         width: startWidth,
@@ -154,7 +157,7 @@ export default function WindowWrapper({
     resizeStartEvent.current = e.type
 
     // Prevent default on touch to avoid scrolling
-    if (e.type === "touchstart") {
+    if (e.type === "touchstart" && !isAnyDragging) {
       e.preventDefault()
     }
 
