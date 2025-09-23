@@ -26,7 +26,7 @@ export default function WindowWrapper({
   const [zIndex, setZIndex] = useState(windowOrder.indexOf(windowId))
   const [position, setPosition] = useState({
     x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
-    y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
+    y: docHeight > 800 ? (docHeight - startHeight) / 2 - 100 : 0,
   })
   const [size, setSize] = useState({
     width: startWidth,
@@ -125,7 +125,7 @@ export default function WindowWrapper({
       // otherwise set it back to the default width/height
       setPosition({
         x: docWidth > startWidth ? (docWidth - startWidth) / 2 : 0,
-        y: docWidth > 500 ? (docHeight - startHeight) / 2 - 100 : 0,
+        y: docHeight > 800 ? (docHeight - startHeight) / 2 - 100 : 0,
       })
       setSize({
         width: startWidth,
@@ -310,6 +310,7 @@ export default function WindowWrapper({
                 : undefined,
             transition: "filter 0.2s ease, opacity 0.2s ease",
           }}
+          autoFocus
         >
           {children}
         </div>

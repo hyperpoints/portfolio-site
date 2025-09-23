@@ -11,11 +11,11 @@ export default defineConfig({
   },
   server: {
     port: 9000, // Replace 3001 with your desired port
-    // host: "0.0.0.0",
-    // strictPort: true,
-    // hmr: {
-    //   clientPort: 9000,
-    // },
+    host: "0.0.0.0",
+    strictPort: true,
+    hmr: {
+      clientPort: 9000,
+    },
   },
   // Explicitly define public directory
   // publicDir: "public",
