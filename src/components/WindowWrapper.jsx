@@ -27,7 +27,7 @@ export default function WindowWrapper({
     x:
       window.innerWidth > startWidth ? (window.innerWidth - startWidth) / 2 : 0,
     y:
-      window.innerHeight > 500
+      window.innerWidth > 500
         ? (window.innerHeight - startHeight) / 2 - 100
         : 0,
   })
@@ -130,7 +130,7 @@ export default function WindowWrapper({
             ? (window.innerWidth - startWidth) / 2
             : 0,
         y:
-          window.innerHeight > 500
+          window.innerWidth > 500
             ? (window.innerHeight - startHeight) / 2 - 100
             : 0,
       })
