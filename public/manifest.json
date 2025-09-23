@@ -10,19 +10,14 @@
     "link": "images"
   },
   {
+    "name": "books",
+    "type": "folder",
+    "link": "books"
+  },
+  {
     "name": "GLORBO",
     "type": "image",
     "link": "GLORBO.png"
-  },
-  {
-    "name": "infinity-coin",
-    "type": "image",
-    "link": "infinity-coin.png"
-  },
-  {
-    "name": "walk-cycle",
-    "type": "image",
-    "link": "walk-cycle.png"
   },
   {
     "name": "github",
