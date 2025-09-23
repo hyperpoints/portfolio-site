@@ -7,6 +7,7 @@ function generateManifests(dirPath) {
 
   const manifest = []
 
+  let links = []
   items.forEach((item) => {
     // Skip the script itself and any manifest files
     if (
@@ -22,17 +23,34 @@ function generateManifests(dirPath) {
     if (item.isDirectory()) {
       const folderLink = path.join(item.path, item.name).replace("public/", "")
       // Add the directory to the manifest
-      manifest.push({ name: item.name, type: "folder", link: folderLink })
+      manifest.unshift({ name: item.name, type: "folder", link: folderLink })
       // Recursively call the function for the subdirectory
       generateManifests(fullPath)
     } else if (item.isFile()) {
       const ext = path.extname(item.name).toLowerCase()
       const fileLink = path.join(item.path, item.name).replace("public/", "")
+      const name = item.name.replace(ext, "")
       // Add the file to the manifest
       switch (ext) {
+        case ".url": {
+          // read the url from the file
+          const url = fs
+            .readFileSync(path.join(item.path, item.name), {
+              encoding: "utf8",
+              flag: "r",
+            })
+            .trim()
+          // add it to the list
+          links.push({
+            name: name,
+            type: "link",
+            link: url,
+          })
+          break
+        }
         case ".html":
           manifest.push({
-            name: item.name,
+            name: name,
             type: "html",
             link: fileLink,
           })
@@ -45,14 +63,14 @@ function generateManifests(dirPath) {
         case ".svg":
         case ".webp":
           manifest.push({
-            name: item.name,
+            name: name,
             type: "image",
             link: fileLink,
           })
           break
         default:
           manifest.push({
-            name: item.name,
+            name: name,
             type: "file",
             link: fileLink,
           })
@@ -60,6 +78,8 @@ function generateManifests(dirPath) {
       }
     }
   })
+  // add links at the bottom of the list
+  manifest.push(...links)
   console.log(JSON.stringify(manifest, null, 2))
   // Write the manifest.json file
   const manifestPath = path.join(dirPath, "manifest.json")

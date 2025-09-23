@@ -1,22 +1,22 @@
 [
   {
-    "name": "screenshots",
-    "type": "folder",
-    "link": "images/screenshots"
-  },
-  {
     "name": "wallpaper",
     "type": "folder",
     "link": "images/wallpaper"
   },
   {
-    "name": "underwater.gif",
-    "type": "image",
-    "link": "images/underwater.gif"
+    "name": "screenshots",
+    "type": "folder",
+    "link": "images/screenshots"
   },
   {
-    "name": "rainy-leaves.gif",
+    "name": "rainy-leaves",
     "type": "image",
     "link": "images/rainy-leaves.gif"
+  },
+  {
+    "name": "underwater",
+    "type": "image",
+    "link": "images/underwater.gif"
   }
 ]

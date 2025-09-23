@@ -1,16 +1,16 @@
 [
   {
-    "name": "links.html",
+    "name": "links",
     "type": "html",
     "link": "projects/links.html"
   },
   {
-    "name": "sherlock-holmes-great-computer-virus.html",
+    "name": "sherlock-holmes-great-computer-virus",
     "type": "html",
     "link": "projects/sherlock-holmes-great-computer-virus.html"
   },
   {
-    "name": "tables.html",
+    "name": "tables",
     "type": "html",
     "link": "projects/tables.html"
   },

@@ -1,13 +1,28 @@
 [
   {
+    "name": "projects",
+    "type": "folder",
+    "link": "projects"
+  },
+  {
     "name": "images",
     "type": "folder",
     "link": "images"
   },
   {
-    "name": "projects",
-    "type": "folder",
-    "link": "projects"
+    "name": "GLORBO",
+    "type": "image",
+    "link": "GLORBO.png"
+  },
+  {
+    "name": "infinity-coin",
+    "type": "image",
+    "link": "infinity-coin.png"
+  },
+  {
+    "name": "walk-cycle",
+    "type": "image",
+    "link": "walk-cycle.png"
   },
   {
     "name": "github",
@@ -18,20 +33,5 @@
     "name": "synthona",
     "type": "link",
     "link": "https://hyperpoints.itch.io/synthona"
-  },
-  {
-    "name": "walk-cycle.png",
-    "type": "image",
-    "link": "walk-cycle.png"
-  },
-  {
-    "name": "infinity-coin.png",
-    "type": "image",
-    "link": "infinity-coin.png"
-  },
-  {
-    "name": "GLORBO.png",
-    "type": "image",
-    "link": "GLORBO.png"
   }
 ]
