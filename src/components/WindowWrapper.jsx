@@ -274,7 +274,7 @@ export default function WindowWrapper({
           </button>
         </div>
         <div className="window-name">
-          {name} {"dragging: " + isAnyDragging + " focused " + isFocused}
+          {"dragging: " + isAnyDragging + " focused " + isFocused}
         </div>
       </div>
       <div
