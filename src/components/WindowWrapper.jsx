@@ -216,6 +216,7 @@ export default function WindowWrapper({
     >
       <div
         className="window-titlebar"
+        onDoubleClick={maximize}
         onMouseDown={startDrag}
         onTouchStart={startDrag}
       >

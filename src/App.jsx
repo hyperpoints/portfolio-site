@@ -14,7 +14,7 @@ function App() {
     }
   }, [])
 
-  const renderFileIcons = () => {
+  const renderBaseWindow = () => {
     if (!isMobile) {
       return <FileIcons />
     } else {
@@ -25,7 +25,7 @@ function App() {
   return (
     <div>
       <FileSystemProvider>
-        {renderFileIcons()}
+        {renderBaseWindow()}
         <WindowManager />
       </FileSystemProvider>
     </div>
