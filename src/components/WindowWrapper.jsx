@@ -106,6 +106,30 @@ export default function WindowWrapper({
     }
   }
 
+  const maximize = () => {
+    const docWidth = document.documentElement.clientWidth
+    const docHeight = document.documentElement.clientHeight
+
+    // if it's not full screen set it
+    if (size.height !== docHeight && size.width !== docWidth) {
+      setPosition({ x: 0, y: 0 })
+      setSize({
+        width: docWidth,
+        height: docHeight - 30,
+      })
+    } else {
+      // otherwise set it back to the default width/height
+      setPosition({
+        x: window.innerWidth > startWidth ? window.innerWidth / 3 : 0,
+        y: window.innerWidth > 500 ? 200 : 0,
+      })
+      setSize({
+        width: startWidth,
+        height: startHeight,
+      })
+    }
+  }
+
   const raise = (e) => {
     // Prevent handling both mouse and touch events for the same action
     if (dragStartEvent.current && dragStartEvent.current !== e.type) return
@@ -228,12 +252,16 @@ export default function WindowWrapper({
             }}
           >
             <Minus size={9}></Minus>
-          </button>
+          </button> */}
           <button
-            onClick={() => console.log("fullscreen button clicked: ", name)}
+            onClick={() => {
+              console.log("fullscreen button clicked: ", name)
+              maximize()
+            }}
             onTouchEnd={(e) => {
               e.preventDefault()
-              console.log("fullscreen button clicked: ", name)
+              maximize()
+              // console.log("fullscreen button clicked: ", name)
             }}
             style={{
               backgroundColor: "#90be6d",
@@ -242,7 +270,7 @@ export default function WindowWrapper({
             }}
           >
             <Maximize2 size={9} style={{ transform: "scaleX(-1)" }}></Maximize2>
-          </button> */}
+          </button>
         </div>
         <div className="window-name">{name}</div>
       </div>
