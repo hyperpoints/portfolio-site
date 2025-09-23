@@ -93,7 +93,7 @@ export default function WindowWrapper({
       dragStartEvent.current = e.type
 
       // Prevent default on touch to avoid scrolling
-      if (e.type === "touchstart") {
+      if (e.type === "touchstart" && !isAnyDragging) {
         e.preventDefault()
       }
 
@@ -209,7 +209,7 @@ export default function WindowWrapper({
         width: size.width,
         height: autoHeight ? "auto" : size.height,
         zIndex,
-        touchAction: "none", // Prevent browser touch actions like scrolling
+        touchAction: isDragging ? "none" : "pan-y",
       }}
       onMouseDown={raise}
       onTouchStart={raise}
