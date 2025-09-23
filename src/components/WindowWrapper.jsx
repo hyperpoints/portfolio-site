@@ -273,9 +273,7 @@ export default function WindowWrapper({
             <Maximize2 size={9} style={{ transform: "scaleX(-1)" }}></Maximize2>
           </button>
         </div>
-        <div className="window-name">
-          {"dragging: " + isAnyDragging + " focused " + isFocused}
-        </div>
+        <div className="window-name">{name}</div>
       </div>
       <div
         className="window-body"
