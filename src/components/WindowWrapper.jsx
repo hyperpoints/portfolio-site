@@ -209,7 +209,7 @@ export default function WindowWrapper({
         width: size.width,
         height: autoHeight ? "auto" : size.height,
         zIndex,
-        // touchAction: "none", // Prevent browser touch actions like scrolling
+        touchAction: "none", // Prevent browser touch actions like scrolling
       }}
       onMouseDown={raise}
       onTouchStart={raise}
@@ -273,7 +273,9 @@ export default function WindowWrapper({
             <Maximize2 size={9} style={{ transform: "scaleX(-1)" }}></Maximize2>
           </button>
         </div>
-        <div className="window-name">{name}</div>
+        <div className="window-name">
+          {name} {"dragging: " + isAnyDragging + " focused " + isFocused}
+        </div>
       </div>
       <div
         className="window-body"
