@@ -10,6 +10,11 @@
     "link": "images"
   },
   {
+    "name": "ideas",
+    "type": "folder",
+    "link": "ideas"
+  },
+  {
     "name": "books",
     "type": "folder",
     "link": "books"
