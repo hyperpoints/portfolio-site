@@ -5,6 +5,11 @@
     "link": "projects"
   },
   {
+    "name": "links",
+    "type": "folder",
+    "link": "links"
+  },
+  {
     "name": "images",
     "type": "folder",
     "link": "images"
@@ -18,16 +23,6 @@
     "name": "GLORBO",
     "type": "image",
     "link": "GLORBO.png"
-  },
-  {
-    "name": "github",
-    "type": "link",
-    "link": "https://github.com/hyperpoints"
-  },
-  {
-    "name": "portfolio-site",
-    "type": "link",
-    "link": "https://github.com/hyperpoints/portfolio-site"
   },
   {
     "name": "synthona",

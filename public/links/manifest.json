@@ -1,0 +1,17 @@
+[
+  {
+    "name": "blog",
+    "type": "link",
+    "link": "https://hyperpoints.substack.com/"
+  },
+  {
+    "name": "github",
+    "type": "link",
+    "link": "https://github.com/hyperpoints"
+  },
+  {
+    "name": "portfolio-site",
+    "type": "link",
+    "link": "https://github.com/hyperpoints/portfolio-site"
+  }
+]
