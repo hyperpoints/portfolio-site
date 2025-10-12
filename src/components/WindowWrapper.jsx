@@ -120,7 +120,7 @@ export default function WindowWrapper({
       setPosition({ x: 0, y: 0 })
       setSize({
         width: docWidth,
-        height: docHeight - 30,
+        height: docHeight - 30 - 50,
       })
     } else {
       // otherwise set it back to the default width/height
@@ -213,6 +213,7 @@ export default function WindowWrapper({
         left: position.x,
         width: size.width,
         height: autoHeight ? "auto" : size.height,
+        maxHeight: docHeight - 50,
         zIndex,
         touchAction: isDragging ? "none" : "pan-y",
       }}
@@ -283,7 +284,11 @@ export default function WindowWrapper({
       </div>
       <div
         className="window-body"
-        style={{ position: "relative", height: "100%" }}
+        style={{
+          position: "relative",
+          height: "100%",
+          maxHeight: docHeight - 50 - 30,
+        }}
         onClick={raise}
         onTouchStart={raise}
       >
@@ -305,10 +310,7 @@ export default function WindowWrapper({
             height: "100%",
             background: "#ccc",
             pointerEvents: !isFocused && allowBlur ? "none" : null,
-            filter:
-              !isFocused && allowBlur
-                ? "grayscale(30%) blur(0.7px)"
-                : undefined,
+            filter: !isFocused && allowBlur ? "grayscale(30%)" : undefined,
             transition: "filter 0.2s ease, opacity 0.2s ease",
           }}
           autoFocus

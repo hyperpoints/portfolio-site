@@ -33,14 +33,14 @@ function WindowManager() {
             case "folder":
               return (
                 <WindowWrapper
-                  name={"Files"}
+                  name={file.name}
                   // startHeight={file.startHeight}
                   // startWidth={file.startWidth}
                   windowId={file.id}
                   key={file.id}
                   close={closeWindow}
                 >
-                  <FileExplorer path={file.link} />
+                  <FileExplorer path={file.link} windowId={file.id} />
                 </WindowWrapper>
               )
             case "image":

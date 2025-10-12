@@ -1,0 +1,25 @@
+.taskbar-container {
+  width: 100%;
+  background-color: lab(50.83% -29.62 -8.73 / 0.305);
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  z-index: 10;
+
+  .taskbar-icon {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    border: 2px solid #1c9bac;
+    background-color: #12798788;
+    border-radius: 0.01;
+    // width: 40px;
+    padding: 10px;
+  }
+
+  .taskbar-icon:hover {
+    border: 2px solid rgb(18, 18, 146);
+    transition: 0.1s ease-in-out;
+    color: white;
+  }
+}

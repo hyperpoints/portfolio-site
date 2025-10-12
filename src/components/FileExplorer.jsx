@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid"
 // import WindowWrapper from "../components/WindowWrapper"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
 
-function FileExplorer({ path, isMobile = false }) {
+function FileExplorer({ path, isMobile = false, windowId }) {
   const { setOpenWindows, openWindows } = useFileSystemContext()
   const [fileList, setFileList] = useState([])
   const [filePathList, setFilePathList] = useState([])
@@ -16,6 +16,7 @@ function FileExplorer({ path, isMobile = false }) {
       fetch(`/portfolio-site/${activeFilePath}/manifest.json`) // Note: no /public in the path
         .then((response) => response.json())
         .then((data) => {
+          updateWindowName()
           setFileList(data)
         })
       // update the filePath
@@ -25,11 +26,25 @@ function FileExplorer({ path, isMobile = false }) {
         .then((response) => response.json())
         .then((data) => {
           setFileList(data)
+          updateWindowName()
         })
       // update the filePath
       setFilePathList([])
     }
   }, [activeFilePath])
+
+  const updateWindowName = () => {
+    // update the name of this file explorer window
+    setOpenWindows([
+      ...openWindows.map((window) => {
+        if (window.id == windowId) {
+          window.name = activeFilePath.split("/").pop()
+          return window
+        }
+        return window
+      }),
+    ])
+  }
 
   const openWindow = (file) => {
     // generate a unique id for this window

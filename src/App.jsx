@@ -4,6 +4,7 @@ import FileIcons from "./components/FileIcons"
 import WindowManager from "./components/WindowManager"
 import { FileSystemProvider } from "./contexts/FileSystemContext"
 import FileExplorer from "./components/FileExplorer"
+import Taskbar from "./components/Taskbar"
 
 function App() {
   const [isMobile, setIsMobile] = useState(false)
@@ -16,9 +17,14 @@ function App() {
 
   const renderBaseWindow = () => {
     if (!isMobile) {
-      return <FileIcons />
+      return (
+        <div>
+          <FileIcons />
+          <Taskbar />
+        </div>
+      )
     } else {
-      return <FileExplorer path={"public"} isMobile={true} />
+      return <FileExplorer path={"public"} isMobile={true} windowId={"base"} />
     }
   }
 

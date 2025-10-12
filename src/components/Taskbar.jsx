@@ -1,10 +1,17 @@
 import { useMemo } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
-// import { File, FolderClosed } from "lucide-react"
-import "./styles/FileIcons.less"
+import { File, FolderClosed } from "lucide-react"
+import "./styles/Taskbar.less"
 
 export default function Taskbar() {
-  const { iconlist, openWindows } = useFileSystemContext()
+  const {
+    iconlist,
+    openWindows,
+    focusedId,
+    setFocusedId,
+    windowOrder,
+    setWindowOrder,
+  } = useFileSystemContext()
 
   // const openWindow = (file) => {
   //   // generate a unique id for this window
@@ -14,45 +21,62 @@ export default function Taskbar() {
   //   setOpenWindows([...openWindows, newFile])
   // }
 
-  const renderFileIcons = useMemo(() => {
-    // if (iconlist) {
-    //   return iconlist.map((file) => {
-    //     if (file.display == false) return
-    //     // handle folders in their own way
-    //     if (file.type !== "folder") {
-    //       return (
-    //         <div
-    //           className="file"
-    //           onDoubleClick={() => openWindow(file)}
-    //           key={file.name}
-    //         >
-    //           <button>
-    //             <File className="file-icons-file" size={60}></File>
-    //           </button>
-    //           <p className="file-label">{file.name}</p>
-    //         </div>
-    //       )
-    //     } else {
-    //       return (
-    //         <div
-    //           className="file"
-    //           onDoubleClick={() => openWindow(file)}
-    //           key={file.name}
-    //         >
-    //           <button>
-    //             <FolderClosed
-    //               className="file-icons-folder"
-    //               size={60}
-    //             ></FolderClosed>
-    //           </button>
-    //           <p className="file-label">{file.name}</p>
-    //         </div>
-    //       )
-    //     }
-    //   })
-    // }
-    return <></>
-  }, [iconlist, openWindows])
+  const raiseWindow = (windowId) => {
+    if (focusedId !== windowId) {
+      setFocusedId(windowId)
+    }
+    // update window order (zindex)
+    let lastWindow = windowOrder[windowOrder.length - 1]
+    if (windowId !== lastWindow) {
+      setWindowOrder([...windowOrder.filter((id) => id !== windowId), windowId])
+    }
+  }
 
-  return <div className="file-icons-container">{renderFileIcons}</div>
+  const renderWindowIcons = useMemo(() => {
+    // console.log(openWindows)
+    if (openWindows.length > 0) {
+      return openWindows.map((window) => {
+        // console.log(window)
+        // console.log(window)
+        switch (window.type) {
+          case "file":
+            return (
+              <button
+                className="taskbar-icon"
+                onClick={() => raiseWindow(window.id)}
+                key={window.id}
+              >
+                {/* <File size={13}></File> */}
+                {window.name}
+              </button>
+            )
+          case "folder":
+            return (
+              <button
+                className="taskbar-icon"
+                onClick={() => raiseWindow(window.id)}
+                key={window.id}
+              >
+                {/* <FolderClosed size={13}></FolderClosed> */}
+                Files - {window.name}
+              </button>
+            )
+          default:
+            return (
+              <button
+                className="taskbar-icon"
+                onClick={() => raiseWindow(window.id)}
+                key={window.id}
+              >
+                {/* <File size={13}></File> */}
+                {window.name}
+              </button>
+            )
+        }
+      })
+    }
+    // return <></>
+  }, [iconlist, openWindows, windowOrder, focusedId])
+
+  return <div className="taskbar-container">{renderWindowIcons}</div>
 }
