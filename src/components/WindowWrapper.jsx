@@ -33,9 +33,16 @@ export default function WindowWrapper({
     height: startHeight,
   })
   const [isDragging, setDragging] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const offset = useRef({ x: 0, y: 0 })
   const isFocused = focusedId === windowId
   const dragStartEvent = useRef(null) // Track if it was touch or mouse
+
+  useEffect(() => {
+    if (window.innerWidth < 500 || window.innerHeight < 700) {
+      setIsMobile(true)
+    }
+  }, [])
 
   useEffect(() => {
     setFocusedId(windowId)
@@ -213,7 +220,7 @@ export default function WindowWrapper({
         left: position.x,
         width: size.width,
         height: autoHeight ? "auto" : size.height,
-        maxHeight: docHeight - 50,
+        maxHeight: isMobile ? docHeight - 50 : "",
         zIndex,
         touchAction: isDragging ? "none" : "pan-y",
       }}
@@ -287,7 +294,7 @@ export default function WindowWrapper({
         style={{
           position: "relative",
           height: "100%",
-          maxHeight: docHeight - 50 - 30,
+          maxHeight: isMobile ? docHeight - 50 - 30 : "",
         }}
         onClick={raise}
         onTouchStart={raise}
