@@ -127,7 +127,7 @@ export default function WindowWrapper({
       setPosition({ x: 0, y: 0 })
       setSize({
         width: docWidth,
-        height: docHeight - 30 - 50,
+        height: !isMobile ? docHeight - 30 - 50 : docHeight,
       })
     } else {
       // otherwise set it back to the default width/height
@@ -220,7 +220,7 @@ export default function WindowWrapper({
         left: position.x,
         width: size.width,
         height: autoHeight ? "auto" : size.height,
-        maxHeight: isMobile ? docHeight - 50 : "",
+        maxHeight: !isMobile ? docHeight - 50 : "",
         zIndex,
         touchAction: isDragging ? "none" : "pan-y",
       }}
@@ -294,7 +294,7 @@ export default function WindowWrapper({
         style={{
           position: "relative",
           height: "100%",
-          maxHeight: isMobile ? docHeight - 50 - 30 : "",
+          maxHeight: !isMobile ? docHeight - 50 - 30 : "",
         }}
         onClick={raise}
         onTouchStart={raise}
