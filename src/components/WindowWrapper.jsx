@@ -11,7 +11,7 @@ export default function WindowWrapper({
   allowBlur = false,
   windowId, // each window should have a unique id
   close,
-  // minimize,
+  minimize,
 }) {
   const {
     focusedId,
@@ -212,6 +212,27 @@ export default function WindowWrapper({
     window.addEventListener("mouseleave", stopResize)
   }
 
+  const renderMinimizeButton = () => {
+    if (!isMobile) {
+      return (
+        <button
+          onClick={() => minimize(windowId)}
+          onTouchEnd={(e) => {
+            e.preventDefault()
+            minimize(windowId)
+          }}
+          style={{
+            backgroundColor: "#f9c74f",
+            color: "black",
+            borderRadius: "10%",
+          }}
+        >
+          <Minus size={9}></Minus>
+        </button>
+      )
+    }
+  }
+
   return (
     <div
       ref={ref}
@@ -255,20 +276,7 @@ export default function WindowWrapper({
           >
             <X size={9} />
           </button>
-          {/* <button
-            onClick={() => minimize(windowId)}
-            onTouchEnd={(e) => {
-              e.preventDefault()
-              minimize(windowId)
-            }}
-            style={{
-              backgroundColor: "#f9c74f",
-              color: "black",
-              borderRadius: "10%",
-            }}
-          >
-            <Minus size={9}></Minus>
-          </button> */}
+          {renderMinimizeButton()}
           <button
             onClick={() => {
               console.log("fullscreen button clicked: ", name)
