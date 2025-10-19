@@ -21,6 +21,18 @@ export default function Taskbar() {
   //   const newFile = { ...file, id: uniqueId }
   //   setOpenWindows([...openWindows, newFile])
   // }
+
+  const pingWindow = (minimized, windowId) => {
+    console.log(windowOrder, windowId)
+    if (minimized) {
+      raiseWindow(windowId)
+    } else if (windowOrder[windowOrder.length - 1] !== windowId) {
+      raiseWindow(windowId)
+    } else {
+      minimizeWindow(windowId)
+    }
+  }
+
   const raiseWindow = (windowId) => {
     if (focusedId !== windowId) {
       setFocusedId(windowId)
@@ -31,6 +43,19 @@ export default function Taskbar() {
       setWindowOrder([...windowOrder.filter((id) => id !== windowId), windowId])
     }
     restoreMinimizedWindow(windowId)
+  }
+
+  const minimizeWindow = (windowId) => {
+    setOpenWindows([
+      ...openWindows.map((window) => {
+        if (window.id == windowId) {
+          // window.name = activeFilePath.split("/").pop()
+          window.minimized = true
+          return window
+        }
+        return window
+      }),
+    ])
   }
 
   const restoreMinimizedWindow = (windowId) => {
@@ -46,8 +71,11 @@ export default function Taskbar() {
   }
 
   const renderWindowIcons = useMemo(() => {
+    // console.log(openWindows)
     if (openWindows.length > 0) {
       return openWindows.map((window) => {
+        // console.log(window)
+        // console.log(window)
         switch (window.type) {
           case "file":
             return (
@@ -55,7 +83,8 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onClick={() => raiseWindow(window.id)}
+                // onClick={() => raiseWindow(window.id)}
+                onClick={() => pingWindow(window.minimized, window.id)}
                 key={window.id}
               >
                 {/* <File size={13}></File> */}
@@ -68,7 +97,8 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onClick={() => raiseWindow(window.id)}
+                // onClick={() => raiseWindow(window.id)}
+                onClick={() => pingWindow(window.minimized, window.id)}
                 key={window.id}
               >
                 {/* <FolderClosed size={13}></FolderClosed> */}
@@ -81,7 +111,8 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onClick={() => raiseWindow(window.id)}
+                // onClick={() => raiseWindow(window.id)}
+                onClick={() => pingWindow(window.minimized, window.id)}
                 key={window.id}
               >
                 {/* <File size={13}></File> */}
