@@ -23,10 +23,7 @@ export default function Taskbar() {
   // }
 
   const pingWindow = (minimized, windowId) => {
-    console.log(windowOrder, windowId)
     if (minimized) {
-      raiseWindow(windowId)
-    } else if (windowOrder[windowOrder.length - 1] !== windowId) {
       raiseWindow(windowId)
     } else {
       minimizeWindow(windowId)
@@ -74,6 +71,7 @@ export default function Taskbar() {
     // console.log(openWindows)
     if (openWindows.length > 0) {
       return openWindows.map((window) => {
+        console.log(windowOrder.indexOf(window.id))
         // console.log(window)
         // console.log(window)
         switch (window.type) {
