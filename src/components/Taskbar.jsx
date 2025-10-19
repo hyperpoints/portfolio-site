@@ -11,6 +11,7 @@ export default function Taskbar() {
     setFocusedId,
     windowOrder,
     setWindowOrder,
+    setOpenWindows,
   } = useFileSystemContext()
 
   // const openWindow = (file) => {
@@ -20,7 +21,6 @@ export default function Taskbar() {
   //   const newFile = { ...file, id: uniqueId }
   //   setOpenWindows([...openWindows, newFile])
   // }
-
   const raiseWindow = (windowId) => {
     if (focusedId !== windowId) {
       setFocusedId(windowId)
@@ -30,19 +30,31 @@ export default function Taskbar() {
     if (windowId !== lastWindow) {
       setWindowOrder([...windowOrder.filter((id) => id !== windowId), windowId])
     }
+    restoreMinimizedWindow(windowId)
+  }
+
+  const restoreMinimizedWindow = (windowId) => {
+    setOpenWindows([
+      ...openWindows.map((window) => {
+        if (window.id == windowId) {
+          window.minimized = null
+          return window
+        }
+        return window
+      }),
+    ])
   }
 
   const renderWindowIcons = useMemo(() => {
-    // console.log(openWindows)
     if (openWindows.length > 0) {
       return openWindows.map((window) => {
-        // console.log(window)
-        // console.log(window)
         switch (window.type) {
           case "file":
             return (
               <button
-                className="taskbar-icon"
+                className={`taskbar-icon ${
+                  window.minimized ? "minimized" : ""
+                }`}
                 onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
@@ -53,7 +65,9 @@ export default function Taskbar() {
           case "folder":
             return (
               <button
-                className="taskbar-icon"
+                className={`taskbar-icon ${
+                  window.minimized ? "minimized" : ""
+                }`}
                 onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
@@ -64,7 +78,9 @@ export default function Taskbar() {
           default:
             return (
               <button
-                className="taskbar-icon"
+                className={`taskbar-icon ${
+                  window.minimized ? "minimized" : ""
+                }`}
                 onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >

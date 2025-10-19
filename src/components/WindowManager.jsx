@@ -12,6 +12,19 @@ function WindowManager() {
     setOpenWindows([...openWindows.filter((file) => file.id !== windowId)])
   }
 
+  const minimizeWindow = (windowId) => {
+    setOpenWindows([
+      ...openWindows.map((window) => {
+        if (window.id == windowId) {
+          // window.name = activeFilePath.split("/").pop()
+          window.minimized = true
+          return window
+        }
+        return window
+      }),
+    ])
+  }
+
   useEffect(() => {
     // initialize window order
     if (windowOrder.length < 1) {
@@ -28,7 +41,7 @@ function WindowManager() {
   const renderWindows = useMemo(() => {
     if (openWindows) {
       return openWindows.map((file) => {
-        if (file.display !== false) {
+        if (file.display !== false && file.minimized !== true) {
           switch (file.type) {
             case "folder":
               return (
@@ -39,6 +52,7 @@ function WindowManager() {
                   windowId={file.id}
                   key={file.id}
                   close={closeWindow}
+                  minimize={minimizeWindow}
                 >
                   <FileExplorer path={file.link} windowId={file.id} />
                 </WindowWrapper>
@@ -53,6 +67,7 @@ function WindowManager() {
                   windowId={file.id}
                   key={file.id}
                   close={closeWindow}
+                  minimize={minimizeWindow}
                 >
                   <img
                     src={file.link}
@@ -75,6 +90,7 @@ function WindowManager() {
                   windowId={file.id}
                   key={file.id}
                   close={closeWindow}
+                  minimize={minimizeWindow}
                   allowBlur={true}
                 >
                   <iframe src={file.link}></iframe>
