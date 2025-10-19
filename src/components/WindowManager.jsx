@@ -40,12 +40,13 @@ function WindowManager() {
   const renderWindows = useMemo(() => {
     if (openWindows) {
       return openWindows.map((file) => {
-        if (file.display !== false && file.minimized !== true) {
+        if (file.display !== false) {
           switch (file.type) {
             case "folder":
               return (
                 <WindowWrapper
                   name={file.name}
+                  hidden={file.minimized}
                   // startHeight={file.startHeight}
                   // startWidth={file.startWidth}
                   windowId={file.id}
@@ -60,6 +61,7 @@ function WindowManager() {
               return (
                 <WindowWrapper
                   name={file.name}
+                  hidden={file.minimized}
                   startWidth={600}
                   autoHeight
                   // allowBlur={false}
@@ -84,6 +86,7 @@ function WindowManager() {
               return (
                 <WindowWrapper
                   name={file.name}
+                  hidden={file.minimized}
                   startHeight={600}
                   startWidth={680}
                   windowId={file.id}

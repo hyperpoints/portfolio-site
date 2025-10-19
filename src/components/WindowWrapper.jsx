@@ -12,6 +12,7 @@ export default function WindowWrapper({
   windowId, // each window should have a unique id
   close,
   minimize,
+  hidden,
 }) {
   const {
     focusedId,
@@ -236,7 +237,9 @@ export default function WindowWrapper({
   return (
     <div
       ref={ref}
-      className={`window ${isAnyDragging ? "disabled-interaction" : ""}`}
+      className={`window ${isAnyDragging ? "disabled-interaction" : ""} ${
+        hidden ? "window-hidden" : ""
+      }`}
       style={{
         top: position.y,
         left: position.x,
