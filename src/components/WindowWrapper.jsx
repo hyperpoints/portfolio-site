@@ -11,7 +11,7 @@ export default function WindowWrapper({
   allowBlur = false,
   windowId, // each window should have a unique id
   close,
-  minimize,
+  // minimize,
 }) {
   const {
     focusedId,
@@ -255,7 +255,7 @@ export default function WindowWrapper({
           >
             <X size={9} />
           </button>
-          <button
+          {/* <button
             onClick={() => minimize(windowId)}
             onTouchEnd={(e) => {
               e.preventDefault()
@@ -268,7 +268,7 @@ export default function WindowWrapper({
             }}
           >
             <Minus size={9}></Minus>
-          </button>
+          </button> */}
           <button
             onClick={() => {
               console.log("fullscreen button clicked: ", name)
