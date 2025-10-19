@@ -14,13 +14,13 @@ export default function Taskbar() {
     setOpenWindows,
   } = useFileSystemContext()
 
-  const pingWindow = (minimized, windowId) => {
-    if (minimized) {
-      raiseWindow(windowId)
-    } else {
-      minimizeWindow(windowId)
-    }
-  }
+  // const pingWindow = (minimized, windowId) => {
+  //   if (minimized) {
+  //     raiseWindow(windowId)
+  //   } else {
+  //     minimizeWindow(windowId)
+  //   }
+  // }
 
   const raiseWindow = (windowId) => {
     if (focusedId !== windowId) {
@@ -34,17 +34,17 @@ export default function Taskbar() {
     restoreMinimizedWindow(windowId)
   }
 
-  const minimizeWindow = (windowId) => {
-    setOpenWindows([
-      ...openWindows.map((window) => {
-        if (window.id == windowId) {
-          window.minimized = true
-          return window
-        }
-        return window
-      }),
-    ])
-  }
+  // const minimizeWindow = (windowId) => {
+  //   setOpenWindows([
+  //     ...openWindows.map((window) => {
+  //       if (window.id == windowId) {
+  //         window.minimized = true
+  //         return window
+  //       }
+  //       return window
+  //     }),
+  //   ])
+  // }
 
   const restoreMinimizedWindow = (windowId) => {
     setOpenWindows([
@@ -69,7 +69,7 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onDoubleClick={() => pingWindow(window.minimized, window.id)}
+                // onDoubleClick={() => pingWindow(window.minimized, window.id)}
                 onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
@@ -83,7 +83,7 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onDoubleClick={() => pingWindow(window.minimized, window.id)}
+                // onDoubleClick={() => pingWindow(window.minimized, window.id)}
                 onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
@@ -97,7 +97,7 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onDoubleClick={() => pingWindow(window.minimized, window.id)}
+                // onDoubleClick={() => pingWindow(window.minimized, window.id)}
                 onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
