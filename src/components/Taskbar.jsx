@@ -17,8 +17,6 @@ export default function Taskbar() {
   const pingWindow = (minimized, windowId) => {
     if (minimized) {
       raiseWindow(windowId)
-    } else if (windowOrder[windowOrder.length - 1] !== windowId) {
-      raiseWindow(windowId)
     } else {
       minimizeWindow(windowId)
     }
@@ -71,7 +69,8 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onClick={() => pingWindow(window.minimized, window.id)}
+                onDoubleClick={() => pingWindow(window.minimized, window.id)}
+                onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
                 {/* <File size={13}></File> */}
@@ -84,7 +83,8 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onClick={() => pingWindow(window.minimized, window.id)}
+                onDoubleClick={() => pingWindow(window.minimized, window.id)}
+                onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
                 {/* <FolderClosed size={13}></FolderClosed> */}
@@ -97,7 +97,8 @@ export default function Taskbar() {
                 className={`taskbar-icon ${
                   window.minimized ? "minimized" : ""
                 }`}
-                onClick={() => pingWindow(window.minimized, window.id)}
+                onDoubleClick={() => pingWindow(window.minimized, window.id)}
+                onClick={() => raiseWindow(window.id)}
                 key={window.id}
               >
                 {/* <File size={13}></File> */}
