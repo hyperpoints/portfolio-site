@@ -131,6 +131,8 @@ export default function Taskbar() {
 
     if (minimized) {
       raiseWindow(windowId)
+    } else if (windowOrder[windowOrder.length - 1] !== windowId) {
+      raiseWindow(windowId)
     } else {
       minimizeWindow(windowId)
     }
