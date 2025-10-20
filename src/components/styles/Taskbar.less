@@ -10,7 +10,7 @@
     display: inline-block;
     position: relative;
     height: 100%;
-    border: 2px solid #1c9bac;
+    border: 2px solid transparent;
     background-color: #12798788;
     border-radius: 0.01;
     // width: 40px;
@@ -21,8 +21,12 @@
     background-color: #22afaf;
   }
 
+  .focused {
+    border: 2px solid #0ac0ba;
+  }
+
   .taskbar-icon:hover {
-    border: 2px solid rgb(18, 18, 146);
+    // border: 2px solid #2828c8;
     transition: 0.1s ease-in-out;
     color: white;
   }

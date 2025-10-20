@@ -172,7 +172,7 @@ export default function Taskbar() {
                 <button
                   className={`taskbar-icon ${
                     window.minimized ? "minimized" : ""
-                  }`}
+                  } ${window.id == focusedId ? "focused" : ""}`}
                   onMouseDown={(e) => handleMouseDown(e, window.id)}
                   style={{
                     cursor: draggingId === window.id ? "grabbing" : "auto",
@@ -190,7 +190,7 @@ export default function Taskbar() {
                 <button
                   className={`taskbar-icon ${
                     window.minimized ? "minimized" : ""
-                  }`}
+                  } ${window.id == focusedId ? "focused" : ""}`}
                   onMouseDown={(e) => handleMouseDown(e, window.id)}
                   style={{
                     cursor: draggingId === window.id ? "grabbing" : "auto",
@@ -208,7 +208,7 @@ export default function Taskbar() {
                 <button
                   className={`taskbar-icon ${
                     window.minimized ? "minimized" : ""
-                  }`}
+                  } ${window.id == focusedId ? "focused" : ""}`}
                   onMouseDown={(e) => handleMouseDown(e, window.id)}
                   style={{
                     cursor: draggingId === window.id ? "grabbing" : "auto",

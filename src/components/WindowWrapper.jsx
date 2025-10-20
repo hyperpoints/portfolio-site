@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
-import { Maximize2, Minus, X } from "lucide-react"
+import { GitFork, Maximize2, Minus, X } from "lucide-react"
 
 export default function WindowWrapper({
   name = "Window",
@@ -302,6 +302,22 @@ export default function WindowWrapper({
           >
             <Maximize2 size={9} style={{ transform: "scaleX(-1)" }}></Maximize2>
           </button>
+          {/* <button
+            onClick={() => {
+              console.log("link button clicked: ", name)
+            }}
+            onTouchEnd={(e) => {
+              e.preventDefault()
+              console.log("link button clicked: ", name)
+            }}
+            style={{
+              backgroundColor: "#6dbebb",
+              color: "black",
+              borderRadius: "10%",
+            }}
+          >
+            <GitFork size={9} style={{ transform: "scaleX(-1)" }}></GitFork>
+          </button> */}
         </div>
         <div className="window-name">{name}</div>
       </div>
