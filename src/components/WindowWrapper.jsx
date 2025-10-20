@@ -21,6 +21,8 @@ export default function WindowWrapper({
     setIsAnyDragging,
     windowOrder,
     setWindowOrder,
+    setTaskbarOrder,
+    taskbarOrder,
   } = useFileSystemContext()
   const ref = useRef(null)
   const docWidth = document.documentElement.clientWidth
@@ -263,11 +265,13 @@ export default function WindowWrapper({
           <button
             onClick={() => {
               setWindowOrder([...windowOrder.filter((id) => id !== windowId)])
+              setTaskbarOrder([...taskbarOrder.filter((id) => id !== windowId)])
               close(windowId)
             }}
             onTouchEnd={(e) => {
               // Handle touch equivalent of click
               e.preventDefault()
+              setTaskbarOrder([...taskbarOrder.filter((id) => id !== windowId)])
               setWindowOrder([...windowOrder.filter((id) => id !== windowId)])
               close(windowId)
             }}

@@ -1,6 +1,6 @@
-import { useMemo } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useFileSystemContext } from "../contexts/FileSystemContext"
-import { File, FolderClosed } from "lucide-react"
+// import { File, FolderClosed } from "lucide-react"
 import "./styles/Taskbar.less"
 
 export default function Taskbar() {
@@ -12,15 +12,98 @@ export default function Taskbar() {
     windowOrder,
     setWindowOrder,
     setOpenWindows,
+    taskbarOrder,
+    setTaskbarOrder,
   } = useFileSystemContext()
 
-  // const pingWindow = (minimized, windowId) => {
-  //   if (minimized) {
-  //     raiseWindow(windowId)
-  //   } else {
-  //     minimizeWindow(windowId)
-  //   }
-  // }
+  const [draggingId, setDraggingId] = useState()
+  const dragState = useRef({
+    isDragging: false,
+    draggingId: null,
+    startX: 0,
+    startIndex: 0,
+  })
+
+  useEffect(() => {
+    // initialize window order
+    if (taskbarOrder.length < 1) {
+      setTaskbarOrder([...openWindows.map((window) => window.id)])
+    } else if (openWindows.length > 0) {
+      // update window order with new window
+      let newWindow = openWindows[openWindows.length - 1]
+      if (newWindow && !taskbarOrder.includes(newWindow.id)) {
+        setTaskbarOrder([...taskbarOrder, newWindow.id])
+      }
+    }
+  }, [openWindows])
+
+  const handleMouseDown = (e, windowId) => {
+    e.preventDefault()
+    dragState.current = {
+      isDragging: true,
+      draggingId: windowId,
+      startX: e.clientX,
+      startIndex: taskbarOrder.indexOf(windowId),
+    }
+
+    // Add global listeners
+    document.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mouseup", handleMouseUp)
+  }
+
+  const handleMouseMove = useCallback(
+    (e) => {
+      if (!dragState.current.isDragging) return
+
+      const { startX, draggingId, startIndex } = dragState.current
+      const minDrag = 100
+      const currentDistance = Math.abs(e.clientX - startX)
+
+      if (currentDistance > 5) {
+        setDraggingId(dragState.current.draggingId)
+      }
+
+      // Calculate new index based on mouse movement
+      let newIndex
+      if (e.clientX > startX + minDrag) {
+        newIndex = startIndex + 1
+      } else if (e.clientX < startX - minDrag) {
+        newIndex = startIndex - 1
+      }
+
+      if (newIndex >= 0) {
+        const newOrder = [...taskbarOrder]
+        const currentIndex = newOrder.indexOf(draggingId)
+
+        // Remove from current position and insert at new position
+        newOrder.splice(currentIndex, 1)
+        newOrder.splice(newIndex, 0, draggingId)
+
+        setTaskbarOrder(newOrder)
+        // dragState.current.startIndex = currentIndex
+        // dragState.current.startX = e.clientX
+        dragState.current.isDragging = false
+        dragState.current.draggingId = null
+      }
+    },
+    [taskbarOrder]
+  )
+
+  const handleMouseUp = useCallback(() => {
+    dragState.current.isDragging = false
+    dragState.current.draggingId = null
+    setDraggingId(null)
+    document.removeEventListener("mousemove", handleMouseMove)
+    document.removeEventListener("mouseup", handleMouseUp)
+  }, [])
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseup", handleMouseUp)
+    }
+  }, [])
 
   const raiseWindow = (windowId) => {
     if (focusedId !== windowId) {
@@ -33,6 +116,14 @@ export default function Taskbar() {
     }
     restoreMinimizedWindow(windowId)
   }
+
+  // const pingWindow = (minimized, windowId) => {
+  //   if (minimized) {
+  //     raiseWindow(windowId)
+  //   } else {
+  //     minimizeWindow(windowId)
+  //   }
+  // }
 
   // const minimizeWindow = (windowId) => {
   //   setOpenWindows([
@@ -59,57 +150,76 @@ export default function Taskbar() {
   }
 
   const renderWindowIcons = useMemo(() => {
-    // console.log(openWindows)
     if (openWindows.length > 0) {
-      return openWindows.map((window) => {
-        switch (window.type) {
-          case "file":
-            return (
-              <button
-                className={`taskbar-icon ${
-                  window.minimized ? "minimized" : ""
-                }`}
-                // onDoubleClick={() => pingWindow(window.minimized, window.id)}
-                onClick={() => raiseWindow(window.id)}
-                key={window.id}
-              >
-                {/* <File size={13}></File> */}
-                {window.name}
-              </button>
-            )
-          case "folder":
-            return (
-              <button
-                className={`taskbar-icon ${
-                  window.minimized ? "minimized" : ""
-                }`}
-                // onDoubleClick={() => pingWindow(window.minimized, window.id)}
-                onClick={() => raiseWindow(window.id)}
-                key={window.id}
-              >
-                {/* <FolderClosed size={13}></FolderClosed> */}
-                Files - {window.name}
-              </button>
-            )
-          default:
-            return (
-              <button
-                className={`taskbar-icon ${
-                  window.minimized ? "minimized" : ""
-                }`}
-                // onDoubleClick={() => pingWindow(window.minimized, window.id)}
-                onClick={() => raiseWindow(window.id)}
-                key={window.id}
-              >
-                {/* <File size={13}></File> */}
-                {window.name}
-              </button>
-            )
-        }
-      })
+      return openWindows
+        .map((window) => {
+          switch (window.type) {
+            case "file":
+              return (
+                <button
+                  className={`taskbar-icon ${
+                    window.minimized ? "minimized" : ""
+                  }`}
+                  onMouseDown={(e) => handleMouseDown(e, window.id)}
+                  style={{
+                    cursor: draggingId === window.id ? "grabbing" : "auto",
+                    opacity: draggingId === window.id ? 0.7 : 1,
+                  }}
+                  onClick={() => raiseWindow(window.id)}
+                  key={window.id}
+                >
+                  {/* <File size={13}></File> */}
+                  {window.name}
+                </button>
+              )
+            case "folder":
+              return (
+                <button
+                  className={`taskbar-icon ${
+                    window.minimized ? "minimized" : ""
+                  }`}
+                  onMouseDown={(e) => handleMouseDown(e, window.id)}
+                  style={{
+                    cursor: draggingId === window.id ? "grabbing" : "auto",
+                    opacity: draggingId === window.id ? 0.7 : 1,
+                  }}
+                  onClick={() => raiseWindow(window.id)}
+                  key={window.id}
+                >
+                  {/* <FolderClosed size={13}></FolderClosed> */}
+                  Files - {window.name}
+                </button>
+              )
+            default:
+              return (
+                <button
+                  className={`taskbar-icon ${
+                    window.minimized ? "minimized" : ""
+                  }`}
+                  onMouseDown={(e) => handleMouseDown(e, window.id)}
+                  style={{
+                    cursor: draggingId === window.id ? "grabbing" : "auto",
+                    opacity: draggingId === window.id ? 0.7 : 1,
+                  }}
+                  onClick={() => raiseWindow(window.id)}
+                  key={window.id}
+                >
+                  {/* <File size={13}></File> */}
+                  {window.name}
+                </button>
+              )
+          }
+        })
+        .sort(
+          (a, b) => taskbarOrder.indexOf(a.key) - taskbarOrder.indexOf(b.key)
+        )
     }
     // return <></>
-  }, [iconlist, openWindows, windowOrder, focusedId])
+  }, [iconlist, openWindows, taskbarOrder, focusedId, draggingId])
 
-  return <div className="taskbar-container">{renderWindowIcons}</div>
+  return (
+    <div className="taskbar-container" onMouseMove={handleMouseMove}>
+      {renderWindowIcons}
+    </div>
+  )
 }

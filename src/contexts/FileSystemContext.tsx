@@ -9,6 +9,7 @@ export function FileSystemProvider({ children }) {
   const [iconlist, setIconlist] = useState([])
   const [openWindows, setOpenWindows] = useState([])
   const [windowOrder, setWindowOrder] = useState([])
+  const [taskbarOrder, setTaskbarOrder] = useState([])
 
   return (
     <FileSystemContext.Provider
@@ -23,6 +24,8 @@ export function FileSystemProvider({ children }) {
         setOpenWindows,
         windowOrder,
         setWindowOrder,
+        taskbarOrder,
+        setTaskbarOrder,
       }}
     >
       {children}
