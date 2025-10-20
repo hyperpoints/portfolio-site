@@ -65,9 +65,11 @@ export default function WindowWrapper({
         Math.min(newX, window.innerWidth - size.width)
       )
       // const clampedY = Math.max(0, Math.min(newY, window.innerHeight - 30)) // 30 = titlebar height
+      // 50 is for the taskbar height
+      const heightLimit = isMobile ? 30 : 80
       const clampedY = Math.max(
         0,
-        Math.min(newY, document.documentElement.clientHeight - 30)
+        Math.min(newY, document.documentElement.clientHeight - heightLimit)
       ) // 30 = titlebar height
       setPosition({ x: clampedX, y: clampedY })
     }
