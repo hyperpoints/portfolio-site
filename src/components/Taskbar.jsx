@@ -89,10 +89,18 @@ export default function Taskbar() {
     [taskbarOrder]
   )
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseUp = useCallback((e) => {
     dragState.current.isDragging = false
     dragState.current.draggingId = null
     setDraggingId(null)
+
+    // if we didn't drag very far allow window ping
+    const currentDistance = Math.abs(e.clientX - dragState.current.startX)
+    if (currentDistance < 5) {
+      dragState.current.draggingId = "ping"
+    }
+
+    // clean up event listeners
     document.removeEventListener("mousemove", handleMouseMove)
     document.removeEventListener("mouseup", handleMouseUp)
   }, [])
@@ -118,6 +126,9 @@ export default function Taskbar() {
   }
 
   const pingWindow = (windowId, minimized) => {
+    if (dragState.current.draggingId !== "ping")
+      return (dragState.current.draggingId = null)
+
     if (minimized) {
       raiseWindow(windowId)
     } else {
