@@ -117,25 +117,25 @@ export default function Taskbar() {
     restoreMinimizedWindow(windowId)
   }
 
-  // const pingWindow = (minimized, windowId) => {
-  //   if (minimized) {
-  //     raiseWindow(windowId)
-  //   } else {
-  //     minimizeWindow(windowId)
-  //   }
-  // }
+  const pingWindow = (windowId, minimized) => {
+    if (minimized) {
+      raiseWindow(windowId)
+    } else {
+      minimizeWindow(windowId)
+    }
+  }
 
-  // const minimizeWindow = (windowId) => {
-  //   setOpenWindows([
-  //     ...openWindows.map((window) => {
-  //       if (window.id == windowId) {
-  //         window.minimized = true
-  //         return window
-  //       }
-  //       return window
-  //     }),
-  //   ])
-  // }
+  const minimizeWindow = (windowId) => {
+    setOpenWindows([
+      ...openWindows.map((window) => {
+        if (window.id == windowId) {
+          window.minimized = true
+          return window
+        }
+        return window
+      }),
+    ])
+  }
 
   const restoreMinimizedWindow = (windowId) => {
     setOpenWindows([
@@ -165,7 +165,7 @@ export default function Taskbar() {
                     cursor: draggingId === window.id ? "grabbing" : "auto",
                     opacity: draggingId === window.id ? 0.7 : 1,
                   }}
-                  onClick={() => raiseWindow(window.id)}
+                  onClick={() => pingWindow(window.id, window.minimized)}
                   key={window.id}
                 >
                   {/* <File size={13}></File> */}
@@ -183,7 +183,7 @@ export default function Taskbar() {
                     cursor: draggingId === window.id ? "grabbing" : "auto",
                     opacity: draggingId === window.id ? 0.7 : 1,
                   }}
-                  onClick={() => raiseWindow(window.id)}
+                  onClick={() => pingWindow(window.id, window.minimized)}
                   key={window.id}
                 >
                   {/* <FolderClosed size={13}></FolderClosed> */}
@@ -201,7 +201,7 @@ export default function Taskbar() {
                     cursor: draggingId === window.id ? "grabbing" : "auto",
                     opacity: draggingId === window.id ? 0.7 : 1,
                   }}
-                  onClick={() => raiseWindow(window.id)}
+                  onClick={() => pingWindow(window.id, window.minimized)}
                   key={window.id}
                 >
                   {/* <File size={13}></File> */}
