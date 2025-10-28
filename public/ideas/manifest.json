@@ -1,5 +1,10 @@
 [
   {
+    "name": "GLORBO.png",
+    "type": "image",
+    "link": "ideas/GLORBO.png"
+  },
+  {
     "name": "wireframe-mode.html",
     "type": "html",
     "link": "ideas/wireframe-mode.html"
