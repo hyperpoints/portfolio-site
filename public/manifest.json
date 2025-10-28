@@ -20,6 +20,11 @@
     "link": "ideas"
   },
   {
+    "name": "README.html",
+    "type": "html",
+    "link": "README.html"
+  },
+  {
     "name": "Resume-2025.pdf",
     "type": "file",
     "link": "Resume-2025.pdf"
