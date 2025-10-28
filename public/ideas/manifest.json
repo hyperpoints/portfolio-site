@@ -5,6 +5,11 @@
     "link": "ideas/GLORBO.png"
   },
   {
+    "name": "glorbo-walk-cycle.png",
+    "type": "image",
+    "link": "ideas/glorbo-walk-cycle.png"
+  },
+  {
     "name": "wireframe-mode.html",
     "type": "html",
     "link": "ideas/wireframe-mode.html"
