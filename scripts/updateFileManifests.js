@@ -50,7 +50,7 @@ function generateManifests(dirPath) {
         }
         case ".html":
           manifest.push({
-            name: name,
+            name: item.name,
             type: "html",
             link: fileLink,
           })
@@ -63,14 +63,14 @@ function generateManifests(dirPath) {
         case ".svg":
         case ".webp":
           manifest.push({
-            name: name,
+            name: item.name,
             type: "image",
             link: fileLink,
           })
           break
         default:
           manifest.push({
-            name: name,
+            name: item.name,
             type: "file",
             link: fileLink,
           })
