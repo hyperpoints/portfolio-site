@@ -5,13 +5,13 @@
     "link": "https://github.com/hyperpoints"
   },
   {
+    "name": "portfolio-site git repo",
+    "type": "link",
+    "link": "https://github.com/hyperpoints/portfolio-site"
+  },
+  {
     "name": "portfolio-site workflows",
     "type": "link",
     "link": "https://github.com/hyperpoints/portfolio-site/actions"
-  },
-  {
-    "name": "portfolio-site",
-    "type": "link",
-    "link": "https://github.com/hyperpoints/portfolio-site"
   }
 ]
